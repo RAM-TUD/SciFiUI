@@ -113,6 +113,29 @@ public class UI extends PApplet
         fill(255);
         ellipse(100,100,30,30);
 
+        int gap = 40;
+        int gridx = 950;
+        int gridy = 350;
+        
+        
+        stroke(255);
+        for(int i = 0; i < 6; i++)
+        {
+            int random = (int)(Math.random() * 99 + 1);
+            textSize(20);
+            text(random,910, gridy);
+            line(940 ,gridy,1240,gridy);
+            gridy += gap;
+        }
+        for(int i = 0; i < 9; i++)
+        {
+            int random = (int)(Math.random() * 99 + 1);
+            textSize(20);
+            text(random,gridx, 320);
+            line(gridx,335,gridx,560);
+            gridx += (gap - 5);
+        }
+
     }
 }
 
