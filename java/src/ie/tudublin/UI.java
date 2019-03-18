@@ -38,9 +38,10 @@ public class UI extends PApplet
     public void draw()
     {
         background(255,0,0);
+        design();
         searchmode();
         loading();
-        design();
+        
         
 
         if (checkKey(LEFT))
@@ -97,17 +98,20 @@ public class UI extends PApplet
     float rotatey = 50;
     public void design()
     {
+       
+        //circle icon on top left
+        int outline = 150;
+        stroke(255);
+        noFill();
+        for(int i = 0; i < 25; i++)
+        {
+            ellipse(100,100,outline,outline);
+            outline--;
+        }
         fill(255,0,0);
-        ellipse(50, 40, 50, 50);
-        line(50, 40,rotatex, rotatey);
-        if(rotatex == 50)
-        {
-            rotatey--;
-        }
-        else
-        {
-            rotatex++;
-        }
+        //ellipse(100,100,100,100);
+        fill(255);
+        ellipse(100,100,30,30);
 
     }
 }
