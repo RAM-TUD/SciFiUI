@@ -168,6 +168,17 @@ public class UI extends PApplet
             
         }
 
+         //moving bar
+         int space = 30;
+         int xbar = 30;
+         line(30,height - 30, 340, height-30);
+         for(int i = 0; i < 12; i++)
+         {
+             int bar = (int)(Math.random() * 200 + 1);
+             rect(xbar,(height-30) - bar ,space,bar);
+             xbar += space;
+         }
+
     }
 }
 
