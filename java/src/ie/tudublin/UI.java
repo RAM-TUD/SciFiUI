@@ -13,6 +13,7 @@ public class UI extends PApplet
     PImage alley;
     PImage target;
     Button button;
+    CircleUI circleui;
     public void settings()
     {
         fullScreen();
@@ -24,6 +25,7 @@ public class UI extends PApplet
         background(alley);
         //background(255,0,0);
         button.render();
+        circleui.render();
         searchmode();
         loading();
         design();
@@ -38,6 +40,7 @@ public class UI extends PApplet
         alley = loadImage("street.jpg");
         target = loadImage("target.jpg");
         button = new Button(this,width/2,50,50);
+        circleui = new CircleUI(this,100,100,50);
     }
 
 
@@ -96,7 +99,7 @@ public class UI extends PApplet
     {
         
         //circle icon on top left
-        int outline = 150;
+        /*int outline = 150;
         stroke(255);
         noFill();
         for(int i = 0; i < 25; i++)
@@ -107,7 +110,7 @@ public class UI extends PApplet
         fill(255,0,0);
         //ellipse(100,100,100,100);
         fill(255);
-        ellipse(100,100,30,30);
+        ellipse(100,100,30,30);*/
 
         
 
