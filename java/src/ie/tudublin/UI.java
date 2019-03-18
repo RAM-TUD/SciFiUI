@@ -12,6 +12,7 @@ public class UI extends PApplet
     
     PImage alley;
     PImage target;
+    Button button;
     public void settings()
     {
         fullScreen();
@@ -22,6 +23,7 @@ public class UI extends PApplet
         
         background(alley);
         //background(255,0,0);
+        button.render();
         searchmode();
         loading();
         design();
@@ -35,6 +37,7 @@ public class UI extends PApplet
         System.out.println(height);
         alley = loadImage("street.jpg");
         target = loadImage("target.jpg");
+        button = new Button(this,width/2,50,50);
     }
 
 
@@ -148,7 +151,7 @@ public class UI extends PApplet
         }
 
         //appreaing buttons
-        int timer = 0;
+        /*int timer = 0;
         int xbutton = width/2 - 200;
         int limit = width/2 + 200;
         int buttonspace = 50;
@@ -170,7 +173,7 @@ public class UI extends PApplet
             }
             timer++;
             
-        }
+        }*/
 
         //line coming down
         stroke(255);
