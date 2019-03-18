@@ -144,6 +144,30 @@ public class UI extends PApplet
             y = 0; 
         }
 
+        int timer = 0;
+        int xbutton = width/2 - 200;
+        int limit = width/2 + 200;
+        int buttonspace = 50;
+        while(xbutton != limit)
+        {
+            if(timer <= 500)
+            {
+                fill(255);
+            }
+            if(timer%5 == 0)
+            {
+                fill(255,0,0);
+            }
+            rect(xbutton,40,40,40);
+            xbutton += buttonspace;
+            if(timer == 500)
+            {
+                timer = 0;
+            }
+            timer++;
+            
+        }
+
     }
 }
 
