@@ -12,8 +12,12 @@ public class UI extends PApplet
     
     PImage alley;
     PImage target;
+    PImage pedestrian;
     Button button;
     CircleUI circleui;
+    Barchart barchart;
+    Grid grid;
+    Targeting targeting;
     public void settings()
     {
         fullScreen();
@@ -24,8 +28,14 @@ public class UI extends PApplet
         
         background(alley);
         //background(255,0,0);
-        button.render();
+        /*button.render();
         circleui.render();
+        barchart.update();
+        barchart.render();
+        grid.render();*/
+        
+        targeting.targets(pedestrian,300, height/2 - 50, 100, 300);
+        targeting.targeticon();
         searchmode();
         loading();
         design();
@@ -41,6 +51,10 @@ public class UI extends PApplet
         target = loadImage("target.jpg");
         button = new Button(this,width/2,50,50);
         circleui = new CircleUI(this,100,100,50);
+        barchart = new Barchart(this, 30, height - 30, 200);
+        grid = new Grid(this,width - 100, (height/2) + 100, 200);
+        targeting = new Targeting(this,50);
+        pedestrian = targeting.loadtarget("man.png");
     }
 
 
@@ -99,7 +113,7 @@ public class UI extends PApplet
     {
         
         //circle icon on top left
-        /*int outline = 150;
+        int outline = 150;
         stroke(255);
         noFill();
         for(int i = 0; i < 25; i++)
@@ -110,7 +124,7 @@ public class UI extends PApplet
         fill(255,0,0);
         //ellipse(100,100,100,100);
         fill(255);
-        ellipse(100,100,30,30);*/
+        ellipse(100,100,30,30);
 
         
 
@@ -141,6 +155,7 @@ public class UI extends PApplet
             gridx += (gap - 5);
         }
         
+        
 
         //moving bar
         int space = 30;
@@ -154,7 +169,7 @@ public class UI extends PApplet
         }
 
         //appreaing buttons
-        /*int timer = 0;
+        int timer = 0;
         int xbutton = width/2 - 200;
         int limit = width/2 + 200;
         int buttonspace = 50;
@@ -176,7 +191,7 @@ public class UI extends PApplet
             }
             timer++;
             
-        }*/
+        }
 
         //line coming down
         stroke(255);

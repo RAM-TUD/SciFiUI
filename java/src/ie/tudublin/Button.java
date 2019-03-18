@@ -18,8 +18,7 @@ public class Button
     }
 
     public void render()
-    {
-        
+    { 
         ui.stroke(200,0,0);
         ui.fill(255);
         ui.rect(x,y,size,size);
