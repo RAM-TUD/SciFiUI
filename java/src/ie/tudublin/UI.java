@@ -4,8 +4,7 @@ import processing.core.PApplet;
 
 public class UI extends PApplet
 {
-    Button b;
-    MovingCircle mc;
+    
 
     boolean[] keys = new boolean[1024];
 
@@ -34,22 +33,36 @@ public class UI extends PApplet
 
     public void setup()
     {
-        b = new Button(this, 50, 50, 100, 50, "I am a button");
-        mc = new MovingCircle(this, width / 2, height / 2, 50);
+      
     }
 
     public void draw()
     {
         background(0);
-        b.render();
-
-        mc.update();
-        mc.render();
+        searchmode();
+        
 
         if (checkKey(LEFT))
         {
             System.out.println("Left arrow key pressed");
         }
+    }
+
+    public void searchmode()
+    {
+        
+        float centerx = width / 2;
+        float centery = height / 2;
+        fill(255);
+        ellipse(centerx, centery,width/4,height/4); //big circle
+        ellipse(centerx, centery, width/6, height/6); //small circle
+        line(centerx - width/12, centery, centerx + width/12, centery); //line across small circle
+        line(centerx,centery + 10, centerx, centery - 10); //tiny center line
+        textAlign(CENTER, CENTER);
+        textSize(50);
+        text("SEARCH MODE", centerx, centery + (height/6));
+        textSize(30);
+        
     }
 }
 
