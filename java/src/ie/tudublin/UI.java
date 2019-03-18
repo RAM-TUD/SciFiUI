@@ -26,9 +26,8 @@ public class UI extends PApplet
 
     public void settings()
     {
-        size(800, 800);
         // Use fullscreen instead of size to make your interface fullscreen
-        //fullScreen(); 
+        fullScreen(); 
     }
 
     public void setup()
@@ -40,6 +39,7 @@ public class UI extends PApplet
     {
         background(0);
         searchmode();
+        loading();
         
 
         if (checkKey(LEFT))
@@ -63,6 +63,34 @@ public class UI extends PApplet
         text("SEARCH MODE", centerx, centery + (height/6));
         textSize(30);
         
+    }
+
+    float loadingbar = 0;
+    public void loading()
+    {
+        
+        textSize(30);
+        float centerx = width/2;
+        fill(255,0,0);
+        rect(centerx - 200, height - 150, 400,50);
+        fill(255);
+        rect(centerx - 200, height - 150, loadingbar, 50);
+        if(loadingbar == 400)
+        {
+            
+            loadingbar = 400;
+            text("ONLINE", width - 80, 50);
+            fill(0,255,0);
+            rect(centerx - 200, height - 150, loadingbar, 50);
+            text("ACTIVATED", centerx, height/2 + (height/6) + 50);
+        }
+        else
+        {
+            text("OFFLINE", width - 80, 50);
+            text("ACTIVATING ...", centerx, height/2 + (height/6) + 50);
+            loadingbar++;
+        }
+     
     }
 }
 
