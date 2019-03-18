@@ -94,8 +94,8 @@ public class UI extends PApplet
         }
      
     }
-    float rotatex = 0;
-    float rotatey = 50;
+    
+    int y= 0;
     public void design()
     {
        
@@ -134,6 +134,14 @@ public class UI extends PApplet
             text(random,gridx, 320);
             line(gridx,335,gridx,560);
             gridx += (gap - 5);
+        }
+
+        stroke(255);
+        line(0, y, width, y);
+        y+=5;
+        if (y > height)
+        {
+            y = 0; 
         }
 
     }
