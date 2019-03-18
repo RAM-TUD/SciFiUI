@@ -37,9 +37,10 @@ public class UI extends PApplet
 
     public void draw()
     {
-        background(0);
+        background(255,0,0);
         searchmode();
         loading();
+        design();
         
 
         if (checkKey(LEFT))
@@ -91,6 +92,23 @@ public class UI extends PApplet
             loadingbar++;
         }
      
+    }
+    float rotatex = 0;
+    float rotatey = 50;
+    public void design()
+    {
+        fill(255,0,0);
+        ellipse(50, 40, 50, 50);
+        line(50, 40,rotatex, rotatey);
+        if(rotatex == 50)
+        {
+            rotatey--;
+        }
+        else
+        {
+            rotatex++;
+        }
+
     }
 }
 
