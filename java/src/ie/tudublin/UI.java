@@ -12,7 +12,10 @@ public class UI extends PApplet
     
     PImage alley;
     PImage target;
-    PImage pedestrian;
+    PImage pedestrian1;
+    PImage pedestrian2;
+    PImage pedestrian3;
+    PImage woman;
     Button button;
     CircleUI circleui;
     Barchart barchart;
@@ -34,11 +37,14 @@ public class UI extends PApplet
         barchart.render();
         grid.render();*/
         
-        targeting.targets(pedestrian,300, height/2 - 50, 100, 300);
-        targeting.targeticon();
+        targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
+        targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
+        targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
         searchmode();
         loading();
         design();
+        targeting.targeticon();
+        
         
         
     }
@@ -54,8 +60,20 @@ public class UI extends PApplet
         barchart = new Barchart(this, 30, height - 30, 200);
         grid = new Grid(this,width - 100, (height/2) + 100, 200);
         targeting = new Targeting(this,50);
-        pedestrian = targeting.loadtarget("man.png");
+        pedestrian1 = targeting.loadtarget("man.png");
+        pedestrian2 = targeting.loadtarget("woman.png");
+        pedestrian3 = targeting.loadtarget("soldier.png");
+        woman = loadImage("womantargeted.jpg");
     }
+
+    public void mousePressed()
+    {
+        if(mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
+        {
+            alley = woman;
+        }
+    }
+
 
 
     public void searchmode()
