@@ -8,6 +8,7 @@ public class CircleUI
     private float y;
     private float diameter;
     private float radius;
+    float r;
     PApplet ui;
 
     public CircleUI(PApplet ui,float x, float y, float diameter)
@@ -26,11 +27,16 @@ public class CircleUI
         int numoutline = 25;
         for(int i =0; i<numoutline; i++)
         {
+            ui.pushMatrix();
+            ui.translate(x,y);
+            ui.rotate(ui.radians(r));
             ui.stroke(255,100);
             ui.noFill();
             //ui.ellipse(x,y,outline,outline);
-            ui.arc(x, y, outline, outline, 0, ui.PI + (float)ui.PI/1.5f);
+            ui.arc(0, 0, outline, outline, 0, ui.PI + (float)ui.PI/1.5f);
             outline--;
+            r += 0.25f;
+            ui.popMatrix();
         }
         ui.fill(255,100);
         ui.ellipse(x,y,diameter,diameter);
