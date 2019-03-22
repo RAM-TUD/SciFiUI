@@ -2,6 +2,8 @@ package ie.tudublin;
 
 
 
+
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -9,18 +11,20 @@ import processing.core.PImage;
 
 public class UI extends PApplet
 {
-    
+ 
     PImage alley;
     PImage target;
     PImage pedestrian1;
     PImage pedestrian2;
     PImage pedestrian3;
     PImage woman;
+    PImage man;
     Button button;
     CircleUI circleui;
     Barchart barchart;
     Grid grid;
     Targeting targeting;
+    
     public void settings()
     {
         fullScreen();
@@ -30,12 +34,12 @@ public class UI extends PApplet
     {
         
         background(alley);
+        
         //background(255,0,0);
-        /*button.render();
+        //button.render();
         circleui.render();
-        barchart.update();
-        barchart.render();
-        grid.render();*/
+        
+        
         
         targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
         targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
@@ -43,6 +47,8 @@ public class UI extends PApplet
         searchmode();
         loading();
         design();
+        barchart.render();
+       // grid.render();
         targeting.targeticon();
         
         
@@ -58,12 +64,13 @@ public class UI extends PApplet
         button = new Button(this,width/2,50,50);
         circleui = new CircleUI(this,100,100,50);
         barchart = new Barchart(this, 30, height - 30, 200);
-        grid = new Grid(this,width - 100, (height/2) + 100, 200);
+        grid = new Grid(this,width - 350, (height/2) - 100, 250);
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
         pedestrian3 = targeting.loadtarget("soldier.png");
         woman = loadImage("womantargeted.jpg");
+        man = loadImage("mantargeted.jpg");
     }
 
     public void mousePressed()
@@ -71,6 +78,10 @@ public class UI extends PApplet
         if(mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
         {
             alley = woman;
+        }
+        if(mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300)
+        {
+            alley = man;
         }
     }
 
@@ -131,7 +142,7 @@ public class UI extends PApplet
     {
         
         //circle icon on top left
-        int outline = 150;
+        /*int outline = 150;
         stroke(255);
         noFill();
         for(int i = 0; i < 25; i++)
@@ -142,7 +153,7 @@ public class UI extends PApplet
         fill(255,0,0);
         //ellipse(100,100,100,100);
         fill(255);
-        ellipse(100,100,30,30);
+        ellipse(100,100,30,30);*/
 
         
 
@@ -153,6 +164,7 @@ public class UI extends PApplet
         int gridy = 350;
         
         image(target,gridx, gridy,280,200);
+        fill(255);
         textSize(35);
         text("AQUIRED TARGET",gridx + 135,gridy + 250);
         stroke(255);
@@ -175,16 +187,7 @@ public class UI extends PApplet
         
         
 
-        //moving bar
-        int space = 30;
-        int xbar = 30;
-        line(30,height - 30, 340, height-30);
-        for(int i = 0; i < 12; i++)
-        {
-            int bar = (int)(Math.random() * 200 + 1);
-            rect(xbar,(height-30) - bar ,space,bar);
-            xbar += space;
-        }
+   
 
         //appreaing buttons
         int timer = 0;

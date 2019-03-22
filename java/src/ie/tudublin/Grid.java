@@ -19,13 +19,21 @@ public class Grid
 
     public void render()
     {
-        int gap = 20;
+        float coordx = x;
+        float coordy = y;
+        int gap = 25;
         ui.stroke(255);
         int numlines = 10; 
         for(int i = 0; i < numlines; i++)
         {
-            ui.line(x,y,x,y+distance);
-            x += gap;
+            ui.line(coordx,coordy,coordx,coordy+distance);
+            coordx += gap;
+        }
+        coordx = x;
+        for(int i = 0; i < numlines; i++)
+        {
+            ui.line(coordx,coordy,coordx+distance,coordy);
+            coordy += gap;
         }
 
     }

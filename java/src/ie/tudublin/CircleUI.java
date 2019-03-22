@@ -21,16 +21,18 @@ public class CircleUI
 
     public void render()
     {
+        
         float outline = 100 + diameter;
         int numoutline = 25;
         for(int i =0; i<numoutline; i++)
         {
-            ui.stroke(255);
+            ui.stroke(255,100);
             ui.noFill();
-            ui.ellipse(x,y,outline,outline);
+            //ui.ellipse(x,y,outline,outline);
+            ui.arc(x, y, outline, outline, 0, ui.PI + (float)ui.PI/1.5f);
             outline--;
         }
-        ui.fill(255);
+        ui.fill(255,100);
         ui.ellipse(x,y,diameter,diameter);
     }
 }

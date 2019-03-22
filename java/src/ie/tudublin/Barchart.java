@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Barchart
+public class Barchart 
 {
     private float x;
     private float y;
@@ -19,28 +19,19 @@ public class Barchart
 
     public void render()
     {
+        float coordx = x;
+        float coordy = y;
         int gap = 30;
-        float numbars = (float)gap/distance;
-        ui.stroke(255);
-        ui.line(x,y,x+distance,y);
-        /*for(int i = 0; i<numbars; i++)
+        float numbars = 12;
+        ui.stroke(255,100);
+        for(int i = 0; i<numbars; i++)
         {
+            ui.fill(255,100);
             int barheight = (int)(Math.random() * 200 + 1);
-            ui.rect(x,y,gap,barheight);
-            x += gap;
-        }*/
-    }
-    public void update()
-    {
-        int gap = 30;
-        float numbars = (float)gap/distance;
-         for(int i = 0; i<numbars; i++)
-        {
-            int barheight = (int)(Math.random() * 200 + 1);
-            ui.rect(x,y,gap,barheight);
-            x += gap;
+            ui.rect(coordx,coordy - barheight,gap,barheight);
+            coordx += gap;
         }
-        
     }
+    
 }
 
