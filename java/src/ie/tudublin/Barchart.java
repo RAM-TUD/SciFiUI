@@ -5,13 +5,11 @@ import processing.core.PApplet;
 public class Barchart extends UIElements
 {
     
-    private float distance;
     
 
-    public Barchart(PApplet ui,float x, float y, float distance)
+    public Barchart(PApplet ui,float x, float y)
     {
         super(x,y,ui);
-        this.distance = distance;
     }
 
     public void render()

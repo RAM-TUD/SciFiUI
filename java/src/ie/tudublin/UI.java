@@ -22,7 +22,7 @@ public class UI extends PApplet
     UIElements button;
     UIElements circleui;
     UIElements barchart;
-    Grid grid;
+    UIElements grid;
     Targeting targeting;
     
     public void settings()
@@ -44,11 +44,12 @@ public class UI extends PApplet
         targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
         targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
         targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
+        barchart.render();
+        grid.render();
         searchmode();
         loading();
         design();
-        barchart.render();
-       // grid.render();
+        
         targeting.targeticon();
         
         
@@ -60,15 +61,16 @@ public class UI extends PApplet
         System.out.println(width);
         System.out.println(height);
         alley = loadImage("street.jpg");
-        target = loadImage("target.jpg");
+        //target = loadImage("target.jpg");
         button = new Button(this,width/2,50,50);
         circleui = new CircleUI(this,100,100,50);
-        barchart = new Barchart(this, 30, height - 30, 200);
-        grid = new Grid(this,width - 350, (height/2) - 100, 250);
+        barchart = new Barchart(this, 30, height - 30);
+        grid = new Grid(this,width - 285, (height/2) - 20, 250);
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
         pedestrian3 = targeting.loadtarget("soldier.png");
+        //target = grid.loadtarget("target.jpg");
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
     }
@@ -140,26 +142,9 @@ public class UI extends PApplet
     int y= 0;
     public void design()
     {
-        
-        //circle icon on top left
-        /*int outline = 150;
-        stroke(255);
-        noFill();
-        for(int i = 0; i < 25; i++)
-        {
-            ellipse(100,100,outline,outline);
-            outline--;
-        }
-        fill(255,0,0);
-        //ellipse(100,100,100,100);
-        fill(255);
-        ellipse(100,100,30,30);*/
-
-        
-
-
+       
         //grid
-        int gap = 40;
+        /*int gap = 40;
         int gridx = 950;
         int gridy = 350;
         
@@ -183,7 +168,7 @@ public class UI extends PApplet
             text(random,gridx, 320);
             line(gridx,335,gridx,560);
             gridx += (gap - 5);
-        }
+        }*/
         
         
 

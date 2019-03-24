@@ -6,7 +6,6 @@ public class CircleUI extends UIElements
 {
    
     private float diameter;
-    private float radius;
     float r;
 
 
@@ -14,7 +13,7 @@ public class CircleUI extends UIElements
     {
         super(x,y,ui);
         this.diameter = diameter;
-        radius = diameter/2;
+        
     }
 
     public void render()
@@ -29,13 +28,12 @@ public class CircleUI extends UIElements
             ui.rotate(ui.radians(r));
             ui.stroke(255,100);
             ui.noFill();
-            //ui.ellipse(x,y,outline,outline);
             ui.arc(0, 0, outline, outline, 0, ui.PI + (float)ui.PI/1.5f);
             outline--;
             r += 0.25f;
             ui.popMatrix();
         }
-       // ui.ellipse(x,y,outline-diameter,outline-diameter);
+       
         ui.fill(255,100);
         ui.ellipse(x,y,diameter,diameter);
     }

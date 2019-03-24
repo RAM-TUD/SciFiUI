@@ -1,6 +1,7 @@
 package ie.tudublin;
 
 import processing.core.PApplet;
+import processing.core.PImage;
 
 public class UIElements
 {
@@ -18,4 +19,7 @@ public class UIElements
     {
 
     }
+	public PImage loadtarget(String string) {
+		return null;
+	}
 }
