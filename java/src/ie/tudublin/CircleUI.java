@@ -2,20 +2,17 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class CircleUI
+public class CircleUI extends UIElements
 {
-    private float x;
-    private float y;
+   
     private float diameter;
     private float radius;
     float r;
-    PApplet ui;
+
 
     public CircleUI(PApplet ui,float x, float y, float diameter)
     {
-        this.ui = ui;
-        this.x = x;
-        this.y = y;
+        super(x,y,ui);
         this.diameter = diameter;
         radius = diameter/2;
     }
@@ -38,6 +35,7 @@ public class CircleUI
             r += 0.25f;
             ui.popMatrix();
         }
+       // ui.ellipse(x,y,outline-diameter,outline-diameter);
         ui.fill(255,100);
         ui.ellipse(x,y,diameter,diameter);
     }

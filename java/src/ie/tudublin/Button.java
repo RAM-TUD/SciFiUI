@@ -2,18 +2,15 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Button
+public class Button extends UIElements
 {
-    private float x;
-    private float y;
+   
     private float size;
-    PApplet ui;
+    
 
     public Button(PApplet ui, float x, float y, float size)
     {
-        this.ui = ui;
-        this.x = x;
-        this.y = y;
+        super(x,y,ui);
         this.size = size;
     }
 

@@ -19,9 +19,9 @@ public class UI extends PApplet
     PImage pedestrian3;
     PImage woman;
     PImage man;
-    Button button;
-    CircleUI circleui;
-    Barchart barchart;
+    UIElements button;
+    UIElements circleui;
+    UIElements barchart;
     Grid grid;
     Targeting targeting;
     

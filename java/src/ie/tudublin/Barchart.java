@@ -2,18 +2,15 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Barchart 
+public class Barchart extends UIElements
 {
-    private float x;
-    private float y;
+    
     private float distance;
-    PApplet ui;
+    
 
     public Barchart(PApplet ui,float x, float y, float distance)
     {
-        this.ui = ui;
-        this.x = x;
-        this.y = y;
+        super(x,y,ui);
         this.distance = distance;
     }
 
