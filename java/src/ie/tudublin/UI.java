@@ -24,6 +24,9 @@ public class UI extends PApplet
     UIElements barchart;
     UIElements grid;
     Targeting targeting;
+    UIElements num;
+    UIElements num2;
+    UIElements num3;
     
     public void settings()
     {
@@ -46,6 +49,7 @@ public class UI extends PApplet
         targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
         barchart.render();
         grid.render();
+        num.render();
         searchmode();
         loading();
         design();
@@ -73,6 +77,8 @@ public class UI extends PApplet
         //target = grid.loadtarget("target.jpg");
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
+        num = new Numbers(100, 200, this);
+        
     }
 
     public void mousePressed()
