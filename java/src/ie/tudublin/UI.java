@@ -19,6 +19,7 @@ public class UI extends PApplet
     PImage pedestrian3;
     PImage woman;
     PImage man;
+    PImage bkimage;
     UIElements button;
     UIElements circleui;
     UIElements barchart;
@@ -36,25 +37,32 @@ public class UI extends PApplet
     public void draw()
     {
         
-        background(alley);
+        background(bkimage);
         
         //background(255,0,0);
         //button.render();
-        circleui.render();
-        
-        
-        
-        targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
-        targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
-        targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
-        barchart.render();
-        grid.render();
-        num.render();
-        searchmode();
-        loading();
-        design();
+        if(bkimage == alley)
+        {
+            circleui.render();
+            targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
+            targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
+            targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
+            barchart.render();
+            grid.render();
+            num.render();
+            searchmode();
+            loading();
+            design();
+        }
+        if(bkimage == woman)
+        {
+            targeting.displayArea();
+
+                 
+        }
         
         targeting.targeticon();
+        
         
         
         
@@ -78,6 +86,7 @@ public class UI extends PApplet
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
         num = new Numbers(100, 200, this);
+        bkimage = alley;
         
     }
 
@@ -85,11 +94,19 @@ public class UI extends PApplet
     {
         if(mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
         {
-            alley = woman;
+            bkimage = woman;
+            
         }
         if(mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300)
         {
-            alley = man;
+            bkimage = man;
+        }
+        if(bkimage == woman)
+        {
+            if(mouseX > width/2 - 50 && mouseX < width/2 - 50 + 200 && mouseY > 150 && mouseY < 150 + 200)
+            {
+                targeting.displayInfo("TARGET IDENTIFIED : ANNA HOMES", width/2 - 50, 150 + 200);
+            } 
         }
     }
 
@@ -149,32 +166,7 @@ public class UI extends PApplet
     public void design()
     {
        
-        //grid
-        /*int gap = 40;
-        int gridx = 950;
-        int gridy = 350;
-        
-        image(target,gridx, gridy,280,200);
-        fill(255);
-        textSize(35);
-        text("AQUIRED TARGET",gridx + 135,gridy + 250);
-        stroke(255);
-        for(int i = 0; i < 6; i++)
-        {
-            int random = (int)(Math.random() * 99 + 1);
-            textSize(20);
-            text(random,910, gridy);
-            line(940 ,gridy,1240,gridy);
-            gridy += gap;
-        }
-        for(int i = 0; i < 9; i++)
-        {
-            int random = (int)(Math.random() * 99 + 1);
-            textSize(20);
-            text(random,gridx, 320);
-            line(gridx,335,gridx,560);
-            gridx += (gap - 5);
-        }*/
+       
         
         
 

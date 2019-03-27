@@ -14,6 +14,7 @@ public class Numbers extends UIElements
         float length = (int)(Math.random()*ui.height + 0);
         ui.textSize(25);
         ui.text(num,x ,y);
+        ui.text(num,x+150,y);
         ui.stroke(255,50);
         ui.line(0,length,ui.width,length);
     }

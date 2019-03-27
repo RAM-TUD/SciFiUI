@@ -26,6 +26,8 @@ public class Targeting
         ui.stroke(255);
         ui.noFill();
         ui.ellipse(ui.mouseX, ui.mouseY, diameter,diameter);
+
+        
     }
 
     public PImage loadtarget(String name)
@@ -38,6 +40,21 @@ public class Targeting
     {
         
         ui.image(name,x,y,size,length);
+    }
+
+    public void displayArea()
+    {
+        ui.noFill();
+        ui.rect(ui.width/2 - 50,150,200,200);
+    }
+
+    public void displayInfo(String info, float linex,float liney)
+    {
+        float distance = 50;
+        ui.fill(255);
+        ui.line(linex,liney,linex + distance, liney);
+        ui.textSize(30);
+        ui.text(info,linex + distance + 30, liney);
     }
 
 }

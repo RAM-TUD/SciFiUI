@@ -1,9 +1,9 @@
 package ie.tudublin;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 
-public class UIElements
+
+public abstract class UIElements
 {
     float x;
     float y;
@@ -15,11 +15,6 @@ public class UIElements
         this.y = y;
         this.ui = ui;
     }
-    public void render()
-    {
-
-    }
-	public PImage loadtarget(String string) {
-		return null;
-	}
+    public abstract  void render();
+	
 }
