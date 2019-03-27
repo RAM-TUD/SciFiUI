@@ -27,7 +27,17 @@ public class Targeting
         ui.noFill();
         ui.ellipse(ui.mouseX, ui.mouseY, diameter,diameter);
 
-        
+        ui.line(ui.mouseX - 50, ui.mouseY - 30, ui.mouseX - 25, ui.mouseY - 30);
+        ui.line(ui.mouseX - 50, ui.mouseY - 30, ui.mouseX - 50, ui.mouseY - 15);
+
+        ui.line(ui.mouseX + 50, ui.mouseY - 30, ui.mouseX + 25, ui.mouseY - 30);
+        ui.line(ui.mouseX + 50, ui.mouseY - 30, ui.mouseX + 50, ui.mouseY - 15);
+
+        ui.line(ui.mouseX + 50, ui.mouseY + 30, ui.mouseX + 25, ui.mouseY + 30);
+        ui.line(ui.mouseX + 50, ui.mouseY + 30, ui.mouseX + 50, ui.mouseY + 15);
+
+        ui.line(ui.mouseX - 50, ui.mouseY + 30, ui.mouseX - 25, ui.mouseY + 30);
+        ui.line(ui.mouseX - 50, ui.mouseY + 30, ui.mouseX - 50, ui.mouseY + 15);
     }
 
     public PImage loadtarget(String name)
@@ -51,9 +61,9 @@ public class Targeting
     public void displayInfo(String info, float linex,float liney)
     {
         float distance = 50;
-        ui.fill(255);
+        ui.stroke(255);
         ui.line(linex,liney,linex + distance, liney);
-        ui.textSize(30);
+        ui.textSize(10);
         ui.text(info,linex + distance + 30, liney);
     }
 
