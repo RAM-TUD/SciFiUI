@@ -4,6 +4,8 @@ package ie.tudublin;
 
 
 
+import java.util.ArrayList;
+
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -20,14 +22,8 @@ public class UI extends PApplet
     PImage woman;
     PImage man;
     PImage bkimage;
-    UIElements button;
-    UIElements circleui;
-    UIElements barchart;
-    UIElements grid;
     Targeting targeting;
-    UIElements num;
-    UIElements num2;
-    UIElements num3;
+    ArrayList<UIElements> elements = new ArrayList<UIElements>();
     
     public void settings()
     {
@@ -43,13 +39,14 @@ public class UI extends PApplet
         //button.render();
         if(bkimage == alley)
         {
-            circleui.render();
+
             targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
             targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
             targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
-            barchart.render();
-            grid.render();
-            num.render();
+            for(int i = 0 ; i < elements.size() ; i ++)
+            {
+                elements.get(i).render();
+            }
             searchmode();
             loading();
             design();
@@ -58,34 +55,27 @@ public class UI extends PApplet
         {
             targeting.displayArea();
 
-                 
         }
-        
         targeting.targeticon();
-        
-        
-        
         
     }
 
+    
+
     public void setup()
     {
-        System.out.println(width);
-        System.out.println(height);
         alley = loadImage("street.jpg");
-        //target = loadImage("target.jpg");
-        button = new Button(this,width/2,50,50);
-        circleui = new CircleUI(this,100,100,50);
-        barchart = new Barchart(this, 30, height - 30);
-        grid = new Grid(this,width - 285, (height/2) - 20, 250);
+        elements.add(new Button(this,width/2,50,50));
+        elements.add(new CircleUI(this,100,100,50));
+        elements.add(new Barchart(this, 30, height - 30));
+        elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
+        elements.add(new Numbers(100,200,this));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
         pedestrian3 = targeting.loadtarget("soldier.png");
-        //target = grid.loadtarget("target.jpg");
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
-        num = new Numbers(100, 200, this);
         bkimage = alley;
         
     }
