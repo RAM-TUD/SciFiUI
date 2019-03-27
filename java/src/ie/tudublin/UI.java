@@ -24,6 +24,7 @@ public class UI extends PApplet
     PImage bkimage;
     Targeting targeting;
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
+    ArrayList<PImage> targets = new ArrayList<PImage>();
     
     public void settings()
     {
@@ -47,6 +48,7 @@ public class UI extends PApplet
             {
                 elements.get(i).render();
             }
+           
             searchmode();
             loading();
             design();
@@ -61,15 +63,21 @@ public class UI extends PApplet
     }
 
     
-
+    int timer = 0;
     public void setup()
     {
         alley = loadImage("street.jpg");
-        elements.add(new Button(this,width/2,50,50));
         elements.add(new CircleUI(this,100,100,50));
         elements.add(new Barchart(this, 30, height - 30));
         elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
-        elements.add(new Numbers(100,200,this));
+        elements.add(new Numbers(100,200,this)); 
+        for(int i = 0; i < 8; i++)
+        {
+            elements.add(new Button(this,350 + (i*80),50,50));
+        }
+        
+
+        
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -162,31 +170,7 @@ public class UI extends PApplet
 
    
 
-        //appreaing buttons
-        int timer = 0;
-        int xbutton = width/2 - 200;
-        int limit = width/2 + 200;
-        int buttonspace = 50;
-        while(xbutton != limit)
-        {
-            if(timer <= 500)
-            {
-                fill(255);
-            }
-            if(timer%5 == 0)
-            {
-                fill(255,0,0);
-            }
-            rect(xbutton,40,40,40);
-            xbutton += buttonspace;
-            if(timer == 500)
-            {
-                timer = 0;
-            }
-            timer++;
-            
-        }
-
+        
         //line coming down
         stroke(255);
         line(0, y, width, y);
