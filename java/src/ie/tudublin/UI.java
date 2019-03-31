@@ -15,6 +15,7 @@ public class UI extends PApplet
 {
  
     PImage alley;
+    PImage offline;
     PImage target;
     PImage pedestrian1;
     PImage pedestrian2;
@@ -26,6 +27,7 @@ public class UI extends PApplet
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
     ArrayList<PImage> targets = new ArrayList<PImage>();
     boolean aquireinfo = false;
+    boolean online = false;
     
     public void settings()
     {
@@ -34,44 +36,45 @@ public class UI extends PApplet
 
     public void draw()
     {
-        
+    
         background(bkimage);
-        
-        //background(255,0,0);
-        //button.render();
-        if(bkimage == alley)
+        if(online == false)
         {
-
-            targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
-            targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
-            targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
-            for(int i = 0 ; i < elements.size() ; i ++)
-            {
-                elements.get(i).render();
-            }
-           
             searchmode();
             loading();
-            design();
         }
-        if(bkimage == woman)
+        if(online == true)
         {
-            targeting.displayArea();
-            if(aquireinfo == true)
+            if(bkimage == alley)
             {
-                targeting.displayInfo("TARGET IDENTIFIED : ANNA HOMES","GENDER: WOMAN | AGE 45", "OCCUPATION:SECRETARY AT LIU WEB APP CORPS",false);
-            }
-
-        }
-        targeting.targeticon();
-        
-    }
-
     
-    int timer = 0;
+                targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
+                targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
+                targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
+                for(int i = 0 ; i < elements.size() ; i ++)
+                {
+                    elements.get(i).render();
+                }
+            }
+            if(bkimage == woman)
+            {
+                targeting.displayArea();
+                if(aquireinfo == true)
+                {
+                    targeting.displayInfo("TARGET IDENTIFIED : ANNA HOMES","GENDER: WOMAN | AGE 45", "OCCUPATION:SECRETARY AT LIU WEB APP CORPS",false);
+                }
+    
+            }
+            targeting.targeticon();
+            
+        }
+    
+    }
     public void setup()
     {
+
         alley = loadImage("street.jpg");
+        offline = loadImage("back.jpg");
         elements.add(new CircleUI(this,100,100,50));
         elements.add(new Barchart(this, 30, height - 30));
         elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
@@ -80,19 +83,15 @@ public class UI extends PApplet
         {
             elements.add(new Button(this,350 + (i*80),50,50));
         }
-        
-
-        
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
         pedestrian3 = targeting.loadtarget("soldier.png");
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
-        bkimage = alley;
+        bkimage = offline;
+     }
         
-    }
-
     public void mousePressed()
     {
         if(mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
@@ -155,6 +154,9 @@ public class UI extends PApplet
             fill(0,255,0);
             rect(centerx - 200, height - 150, loadingbar, 50);
             text("ACTIVATED", centerx, height/2 + (height/6) + 50);
+            online = true;
+            bkimage = alley;
+            
         }
         else
         {

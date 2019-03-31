@@ -65,7 +65,7 @@ public class Targeting
         float y = 200;
         ui.stroke(255);
         ui.line(x,200,x - distance,y);
-        ui.line(x - distance, y, x- distance, y + 50);
+        ui.line(x - distance, y, x- distance, y + 30);
         ui.line(x - distance, y + 30, x - (distance)*2, y + 30);
         ui.textSize(15);
         ui.text(info,x - distance, y - 50);
