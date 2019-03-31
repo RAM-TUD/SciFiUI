@@ -58,13 +58,28 @@ public class Targeting
         ui.rect(ui.width/2 - 50,150,200,200);
     }
 
-    public void displayInfo(String info, float linex,float liney)
+    public void displayInfo(String info, String info2, String info3, boolean match)
     {
-        float distance = 50;
+        float distance = 150;
+        float x = ui.width/2 - 50;
+        float y = 200;
         ui.stroke(255);
-        ui.line(linex,liney,linex + distance, liney);
-        ui.textSize(10);
-        ui.text(info,linex + distance + 30, liney);
+        ui.line(x,200,x - distance,y);
+        ui.line(x - distance, y, x- distance, y + 50);
+        ui.line(x - distance, y + 30, x - (distance)*2, y + 30);
+        ui.textSize(15);
+        ui.text(info,x - distance, y - 50);
+        ui.text(info2,x-distance,y+50);
+        ui.text(info3,x-distance,y+70);
+        if(match == false)
+        {
+            ui.text("MATCH NOT FOUND", x - distance, y - 35);
+        }
+        else
+        {
+            ui.text("MATCH FOUND", x - distance, y - 35);
+        }
+
     }
 
 }

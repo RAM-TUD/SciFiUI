@@ -25,6 +25,7 @@ public class UI extends PApplet
     Targeting targeting;
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
     ArrayList<PImage> targets = new ArrayList<PImage>();
+    boolean aquireinfo = false;
     
     public void settings()
     {
@@ -56,6 +57,10 @@ public class UI extends PApplet
         if(bkimage == woman)
         {
             targeting.displayArea();
+            if(aquireinfo == true)
+            {
+                targeting.displayInfo("TARGET IDENTIFIED : ANNA HOMES","GENDER: WOMAN | AGE 45", "OCCUPATION:SECRETARY AT LIU WEB APP CORPS",false);
+            }
 
         }
         targeting.targeticon();
@@ -103,7 +108,7 @@ public class UI extends PApplet
         {
             if(mouseX > width/2 - 50 && mouseX < width/2 - 50 + 200 && mouseY > 150 && mouseY < 150 + 200)
             {
-                targeting.displayInfo("TARGET IDENTIFIED : ANNA HOMES", width/2 - 50, 150 + 200);
+                aquireinfo = true;
             } 
         }
     }
