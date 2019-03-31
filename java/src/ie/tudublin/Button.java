@@ -19,7 +19,7 @@ public class Button extends UIElements
         ui.stroke(200,0,0);
         ui.fill(255);
         ui.rect(x,y,size,size);
-        int timer = 0;
+        
       
     }
    

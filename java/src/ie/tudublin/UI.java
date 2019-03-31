@@ -47,7 +47,6 @@ public class UI extends PApplet
         {
             if(bkimage == alley)
             {
-    
                 targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
                 targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
                 targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
@@ -55,6 +54,8 @@ public class UI extends PApplet
                 {
                     elements.get(i).render();
                 }
+                design();
+                searchmode();
             }
             if(bkimage == woman)
             {
@@ -190,6 +191,14 @@ public class UI extends PApplet
         
 
        
+    }
+
+    public void pointalize()
+    {
+        float x = random(0,width);
+        float y = random(0,height);
+        fill(200,0,0);
+        ellipse(x,y,10,10);
     }
 
    
