@@ -5,9 +5,9 @@ import processing.core.PApplet;
 
 public abstract class UIElements
 {
-    float x;
-    float y;
-    PApplet ui;
+    protected float x;
+    protected float y;
+    protected PApplet ui;
 
     public UIElements(float x, float y, PApplet ui)
     {
