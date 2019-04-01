@@ -57,15 +57,34 @@ public class Targeting
         ui.noFill();
         ui.rect(ui.width/2 - 50,150,200,200);
     }
-
+    int i =0;
+    int a =0;
+    int x;
     public void displayInfo(String info, String info2, String info3, boolean match)
     {
+        boolean nextline = false;
         float distance = 150;
         float x = ui.width/2 - 50;
         float y = 200;
         ui.stroke(255);
-        ui.line(x,200,x - distance,y);
-        ui.line(x - distance, y, x- distance, y + 30);
+        if(i < distance)
+        {
+            ui.line(x,200,x - i,y);
+            i++;
+        }       
+        if(i == distance)
+        {
+            nextline = true;
+        }
+        if(nextline == true)
+        {
+            if(a != 30)
+            {
+                ui.line(x - distance, y, x- distance, y + a);
+                a++;
+            }
+        } 
+        
         ui.line(x - distance, y + 30, x - (distance)*2, y + 30);
         ui.textSize(15);
         ui.text(info,x - distance, y - 50);
