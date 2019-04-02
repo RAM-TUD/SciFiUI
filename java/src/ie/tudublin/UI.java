@@ -6,8 +6,11 @@ package ie.tudublin;
 
 import java.util.ArrayList;
 
+import ddf.minim.AudioPlayer;
+import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PImage;
+
 
 
 
@@ -26,9 +29,10 @@ public class UI extends PApplet
     PImage bkimage;
     Targeting targeting;
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
-    ArrayList<PImage> targets = new ArrayList<PImage>();
     boolean aquireinfo = false;
     boolean online = false;
+    AudioPlayer file;
+    Minim minim;
     
     public void settings()
     {
@@ -74,7 +78,9 @@ public class UI extends PApplet
     }
     public void setup()
     {
-
+        minim = new Minim(this);
+        file = minim.loadFile("Theyre-Here.mp3", 2000);
+        file.play();
         alley = loadImage("street.jpg");
         offline = loadImage("back.jpg");
         elements.add(new CircleUI(this,100,100,50));

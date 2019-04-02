@@ -57,8 +57,8 @@ public class Targeting
         ui.noFill();
         ui.rect(ui.width/2 - 50,150,200,200);
     }
-    int i =0;
-    int a =0;
+    float i ;
+    float a ;
     int x;
     public void displayInfo(String info, String info2, String info3, boolean match)
     {
@@ -67,23 +67,28 @@ public class Targeting
         float x = ui.width/2 - 50;
         float y = 200;
         ui.stroke(255);
-        if(i < distance)
-        {
-            ui.line(x,200,x - i,y);
-            i++;
-        }       
         if(i == distance)
         {
             nextline = true;
-        }
-        if(nextline == true)
+            i = distance;
+            ui.line(x,200,x - i,y);
+        }       
+        else
         {
-            if(a != 30)
-            {
-                ui.line(x - distance, y, x- distance, y + a);
-                a++;
-            }
-        } 
+            ui.line(x,200,x - i,y);
+            i++;
+        }
+        if(nextline == true && a == 30)
+        {
+            nextline = false;
+            a = 30;
+            ui.line(x - distance, y, x- distance, y + a);
+        }
+        else if(nextline == true)
+        {
+            ui.line(x,200,x - i,y);
+            a++;
+        }
         
         ui.line(x - distance, y + 30, x - (distance)*2, y + 30);
         ui.textSize(15);
