@@ -56,6 +56,7 @@ public class Targeting
     {
         ui.noFill();
         ui.rect(ui.width/2 - 50,150,200,200);
+        ui.rect(ui.width/2)
     }
     float i ;
     float a ;
