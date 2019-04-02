@@ -1,9 +1,5 @@
 package ie.tudublin;
 
-
-
-
-
 import java.util.ArrayList;
 
 import ddf.minim.AudioPlayer;
@@ -16,8 +12,6 @@ import processing.core.PImage;
 
 public class UI extends PApplet
 {
-    
-    
     PImage alley;
     PImage offline;
     PImage target;
@@ -75,11 +69,11 @@ public class UI extends PApplet
                     Display d = displays.get(areaselect);
                     float x = d.x;
                     float y = d.y;
-                    line(x, y + y/4, x - 150, y + y/4 );
-                    line(x - 150, y + y/4, x - 150, y + y/4 - 30 );
-                    line(x - 150, y + y/4 - 30, x - 250, y + y/4 - 30 );
+                    line(x, y + d.getSize()/4, x - 150, y + d.getSize()/4 );
+                    line(x - 150, y + d.getSize()/4, x - 150, y + d.getSize()/4 - 30 );
+                    line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
-                    text(d.getAnalysis(), x - 250, y + y/4 - 60);
+                    text(d.getAnalysis(), x - 250, y + d.getSize()/4 - 60);
                 }
             }
             targeting.targeticon();
@@ -104,6 +98,7 @@ public class UI extends PApplet
         }
         displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM"));
         displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45"));
+        displays.add(new Display(width/2 - 70, height - 150,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS"));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
