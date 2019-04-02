@@ -24,8 +24,8 @@ public class UI extends PApplet
     Targeting targeting;
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
     ArrayList<Display> displays = new ArrayList<Display>();
-    boolean aquireinfo = false;
     boolean online = false;
+    boolean terminate;
     AudioPlayer file;
     Minim minim;
     
@@ -59,13 +59,17 @@ public class UI extends PApplet
             }
             if(bkimage == woman)
             {
-                
+                int analyse = 0;
                 for(Display d: displays)
                 {
                     d.render();
                 }
                 if(areaselect != -1)
                 {
+                    if(analyse == 0)
+                    {
+                        terminate = false;
+                    }
                     Display d = displays.get(areaselect);
                     float x = d.x;
                     float y = d.y;
@@ -74,6 +78,14 @@ public class UI extends PApplet
                     line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
                     text(d.getAnalysis(), x - 250, y + d.getSize()/4 - 60);
+                    analyse++;
+                }
+                if(analyse >= 3)
+                {
+                    terminate = true;
+                    textSize(20);
+                    text("ANALYSIS COMPLETE : BEGIN TERMINATION?",20,height-20);
+                    analyse = 0;
                 }
             }
             targeting.targeticon();
@@ -121,10 +133,6 @@ public class UI extends PApplet
         }
         if(bkimage == woman)
         {
-            if(mouseX > width/2 - 50 && mouseX < width/2 - 50 + 200 && mouseY > 150 && mouseY < 150 + 200)
-            {
-                aquireinfo = true;
-            }
             for(int i = 0; i < displays.size(); i++)
             {
                 float x = displays.get(i).x;
@@ -136,7 +144,13 @@ public class UI extends PApplet
             }
         }
     }
-
+    
+    public void keyPressed() {
+        /*if(key == 't' && terminate == true)
+        {
+        }*/
+        
+    }
 
 
     public void searchmode()
