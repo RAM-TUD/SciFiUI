@@ -5,11 +5,13 @@ import processing.core.PApplet;
 public class Display extends UIElements
 {
     private float size;
+    private String analysis;
     
-    public Display(float x, float y, PApplet ui, float size)
+    public Display(float x, float y, PApplet ui, float size, String analysis)
     {
         super(x,y,ui);
         this.size = size;
+        this.analysis = analysis;
     }
 
     public void render()
@@ -22,14 +24,28 @@ public class Display extends UIElements
     /**
      * @return the size
      */
-    public int getSize() {
+    public float getSize() {
         return size;
     }
 
     /**
      * @param size the size to set
      */
-    public void setSize(int size) {
+    public void setSize(float size) {
         this.size = size;
+    }
+
+    /**
+     * @return the analysis
+     */
+    public String getAnalysis() {
+        return analysis;
+    }
+
+    /**
+     * @param analysis the analysis to set
+     */
+    public void setAnalysis(String analysis) {
+        this.analysis = analysis;
     }
 }

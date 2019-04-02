@@ -29,6 +29,7 @@ public class UI extends PApplet
     PImage bkimage;
     Targeting targeting;
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
+    ArrayList<Display> displays = new ArrayList<Display>();
     boolean aquireinfo = false;
     boolean online = false;
     AudioPlayer file;
@@ -65,6 +66,21 @@ public class UI extends PApplet
             if(bkimage == woman)
             {
                 targeting.displayArea();
+                for(Display d: displays)
+                {
+                    d.render();
+                }
+                if(areaselect != -1)
+                {
+                    Display d = displays.get(areaselect);
+                    float x = d.x;
+                    float y = d.y;
+                    line(x, y + y/4, x - 150, y + y/4 );
+                    line(x - 150, y + y/4, x - 150, y + y/4 - 30 );
+                    line(x - 150, y + y/4 - 30, x - 250, y + y/4 - 30 );
+                    textSize(15);
+                    text(d.getAnalysis(), x - 250, y + y/4 - 60);
+                }
                 if(aquireinfo == true)
                 {
                     targeting.displayInfo("TARGET IDENTIFIED : ANNA HOMES","GENDER: WOMAN | AGE 45", "OCCUPATION:SECRETARY AT LIU WEB APP CORPS",false);
@@ -91,6 +107,7 @@ public class UI extends PApplet
         {
             elements.add(new Button(this,350 + (i*80),50,50));
         }
+        displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM"));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -99,7 +116,7 @@ public class UI extends PApplet
         man = loadImage("mantargeted.jpg");
         bkimage = offline;
      }
-        
+    int areaselect = -1;    
     public void mousePressed()
     {
         if(mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
@@ -116,7 +133,16 @@ public class UI extends PApplet
             if(mouseX > width/2 - 50 && mouseX < width/2 - 50 + 200 && mouseY > 150 && mouseY < 150 + 200)
             {
                 aquireinfo = true;
-            } 
+            }
+            for(int i = 0; i < displays.size(); i++)
+            {
+                float x = displays.get(i).x;
+                float y = displays.get(i).y;
+                if(dist(mouseX,mouseY,x + x/4,y + y/4) < displays.get(i).getSize())
+                {
+                    areaselect = i;
+                }
+            }
         }
     }
 
