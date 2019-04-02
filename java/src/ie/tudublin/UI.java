@@ -65,7 +65,7 @@ public class UI extends PApplet
             }
             if(bkimage == woman)
             {
-                targeting.displayArea();
+                
                 for(Display d: displays)
                 {
                     d.render();
@@ -81,11 +81,6 @@ public class UI extends PApplet
                     textSize(15);
                     text(d.getAnalysis(), x - 250, y + y/4 - 60);
                 }
-                if(aquireinfo == true)
-                {
-                    targeting.displayInfo("TARGET IDENTIFIED : ANNA HOMES","GENDER: WOMAN | AGE 45", "OCCUPATION:SECRETARY AT LIU WEB APP CORPS",false);
-                }
-    
             }
             targeting.targeticon();
             
@@ -108,6 +103,7 @@ public class UI extends PApplet
             elements.add(new Button(this,350 + (i*80),50,50));
         }
         displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM"));
+        displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45"));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
