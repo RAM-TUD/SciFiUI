@@ -47,11 +47,12 @@ public class UI extends PApplet
         }
         if(online == true)
         {
-            textSize(30);
-            text("ONLINE", width - 80, 50);
-            printSpec();
+            
             if(bkimage == alley)
             {
+                textSize(30);
+                text("ONLINE", width - 80, 50);
+                printSpec();
                 targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
                 targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
                 targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
@@ -135,6 +136,7 @@ public class UI extends PApplet
         searchmode = new SearchMode(this);
         minim = new Minim(this);
         file = minim.loadFile("Theyre-Here.mp3", 2000);
+        file.loop();
         file.play();
         alley = loadImage("street.jpg");
         offline = loadImage("back.jpg");
@@ -283,8 +285,9 @@ public class UI extends PApplet
         for(int i =0 ; i<specs.size(); i++)
         {
             textSize(15);
-            text(specs.get(i).getVersion(), width - 450, height - 100 + (i*15));
-            text(specs.get(i).getCorps(), width - 580, height - 100 + (i*15));
+            text(specs.get(i).getVersion(), width - 560, height - 100 + (i*15));
+            text(specs.get(i).getCorps(), width - 400, height - 100 + (i*15));
+            text(specs.get(i).getFeatures(), width/2 - 100, height - 100 + (i*15));
         }
     }
 }
