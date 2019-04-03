@@ -60,12 +60,12 @@ public class UI extends PApplet
             if(bkimage == woman)
             {
                 int analyse = 0;
-                for(int i = 0; i < 2; i++)
+                for(int i = 0; i <= 2; i++)
                 {
                     Display d = displays.get(i);
                     d.render();
                 }
-                if(areaselect != -1)
+                if(areaselect != -1 && areaselect < 3)
                 {
                     if(analyse == 0)
                     {
@@ -97,7 +97,7 @@ public class UI extends PApplet
                     Display d = displays.get(i);
                     d.render();
                 }
-                if(areaselect != -1)
+                if(areaselect != -1 && areaselect > 2)
                 {
                     if(analyse == 0)
                     {
@@ -145,7 +145,7 @@ public class UI extends PApplet
         displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45"));
         displays.add(new Display(width/2 - 70, height - 150,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS"));
         displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH "));
-        displays.add(new Display(300, height/2,this,150,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED"));
+        displays.add(new Display(width/2 - 50, height - 200,this,150,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED"));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -157,12 +157,12 @@ public class UI extends PApplet
     int areaselect = -1;    
     public void mousePressed()
     {
-        if(mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
+        if(bkimage == alley && mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
         {
             bkimage = woman;
             
         }
-        if(mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300)
+        if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300)
         {
             bkimage = man;
         }
@@ -184,7 +184,10 @@ public class UI extends PApplet
         /*if(key == 't' && terminate == true)
         {
         }*/
-        
+        if(key == 'b' && bkimage != alley)
+        {
+            bkimage = alley;
+        }
     }
 
 
