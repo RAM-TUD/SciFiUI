@@ -49,6 +49,7 @@ public class UI extends PApplet
         {
             textSize(30);
             text("ONLINE", width - 80, 50);
+            printSpec();
             if(bkimage == alley)
             {
                 targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
@@ -161,6 +162,7 @@ public class UI extends PApplet
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
         bkimage = offline;
+        loadSpec();
      }
     int areaselect = -1;    
     public void mousePressed()
@@ -274,6 +276,15 @@ public class UI extends PApplet
         {
             Specs spec = new Specs(row);
             specs.add(spec);
+        }
+    }
+    public void printSpec()
+    {
+        for(int i =0 ; i<specs.size(); i++)
+        {
+            textSize(15);
+            text(specs.get(i).getVersion(), width - 450, height - 100 + (i*15));
+            text(specs.get(i).getCorps(), width - 580, height - 100 + (i*15));
         }
     }
 }
