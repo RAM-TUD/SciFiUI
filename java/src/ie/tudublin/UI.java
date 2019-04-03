@@ -75,7 +75,6 @@ public class UI extends PApplet
                     line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
                     text(d.getAnalysis() + " " + areaselect, x - 250, y + d.getSize()/4 - 60);
-                    //analyse++;
                     text(analyse,50,50);
                 }
                 if(analyse == 3)
@@ -100,10 +99,6 @@ public class UI extends PApplet
                 }
                 if(areaselect != -1 && areaselect > 2)
                 {
-                    if(analyse != 0)
-                    {
-                     terminate = false;
-                    }
                     Display d = displays.get(areaselect);
                     float x = d.x;
                     float y = d.y;
@@ -118,6 +113,12 @@ public class UI extends PApplet
                     terminate = true;
                     textSize(20);
                     text("ANALYSIS COMPLETE : BEGIN TERMINATION?",250,height-20);
+                }
+                if(analyse == 40)
+                {
+                    fill(255,0,0);
+                    textSize(150);
+                    text(testTerminate,width/2, height/2);
                 }
             }
             targeting.targeticon();
@@ -170,6 +171,7 @@ public class UI extends PApplet
         }
         if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300)
         {
+            analyse = 0;
             bkimage = man;
             areaselect = -1;
         }
@@ -198,6 +200,10 @@ public class UI extends PApplet
                 if(mouseX < x + displays.get(i).getSize() && mouseX > x && mouseY < y + displays.get(i).getSize() && mouseY > y)
                 {
                     areaselect = i;
+                if(analyse != 3)
+                {
+                    analyse++;
+                }
                 }
             }
         }
