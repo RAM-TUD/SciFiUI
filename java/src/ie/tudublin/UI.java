@@ -92,7 +92,7 @@ public class UI extends PApplet
             if(bkimage == man)
             {
                 int analyse = 0;
-                for(int i = 3; i < 5; i++)
+                for(int i = 3; i < 6; i++)
                 {
                     Display d = displays.get(i);
                     d.render();
@@ -136,16 +136,20 @@ public class UI extends PApplet
         elements.add(new CircleUI(this,100,100,50));
         elements.add(new Barchart(this, 30, height - 30));
         elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
-        elements.add(new Numbers(100,200,this)); 
-        for(int i = 0; i < 8; i++)
+        for(int i = 0; i < 4; i++)
         {
+            elements.add(new Numbers(width - 220, 170 + (i*30),this));
+        }
+        for(int i = 0; i < 8; i++)
+        { 
             elements.add(new Button(this,350 + (i*80),50,50));
         }
+        displays.add(new Display(width/2 - 100, height - 200,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS"));
         displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM"));
         displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45"));
-        displays.add(new Display(width/2 - 70, height - 150,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS"));
         displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH "));
-        displays.add(new Display(width/2 - 50, height - 200,this,150,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED"));
+        displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED"));
+        displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED"));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -160,24 +164,39 @@ public class UI extends PApplet
         if(bkimage == alley && mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
         {
             bkimage = woman;
+            areaselect = -1;
             
         }
         if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300)
         {
             bkimage = man;
+            areaselect = -1;
         }
-        if(bkimage == woman | bkimage == man)
+        if(bkimage == woman)
         {
-            for(int i = 0; i < displays.size(); i++)
+            for(int i = 0; i < 3; i++)
             {
                 float x = displays.get(i).x;
                 float y = displays.get(i).y;
-                if(dist(mouseX,mouseY,x + x/4,y + y/4) < displays.get(i).getSize())
+                if(mouseX < x + displays.get(i).getSize() && mouseX > x && mouseY < y + displays.get(i).getSize() && mouseY > y)
                 {
                     areaselect = i;
                 }
             }
         }
+        if(bkimage == man)
+        {
+            for(int i = 3; i < 6; i++)
+            {
+                float x = displays.get(i).x;
+                float y = displays.get(i).y;
+                if(mouseX < x + displays.get(i).getSize() && mouseX > x && mouseY < y + displays.get(i).getSize() && mouseY > y)
+                {
+                    areaselect = i;
+                }
+            }
+        }
+
     }
     
     public void keyPressed() {
@@ -267,14 +286,6 @@ public class UI extends PApplet
         
 
        
-    }
-
-    public void pointalize()
-    {
-        float x = random(0,width);
-        float y = random(0,height);
-        fill(200,0,0);
-        ellipse(x,y,10,10);
     }
 
    
