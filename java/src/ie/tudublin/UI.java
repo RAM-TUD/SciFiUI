@@ -7,9 +7,6 @@ import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-
-
-
 public class UI extends PApplet
 {
     PImage alley;
@@ -25,10 +22,11 @@ public class UI extends PApplet
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
     ArrayList<Display> displays = new ArrayList<Display>();
     boolean online = false;
-    boolean terminate;
+    boolean terminate = false;
     AudioPlayer file;
     Minim minim;
     SearchMode searchmode;
+    int analyse;
     
     public void settings()
     {
@@ -46,6 +44,8 @@ public class UI extends PApplet
         }
         if(online == true)
         {
+            textSize(30);
+            text("ONLINE", width - 80, 50);
             if(bkimage == alley)
             {
                 targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
@@ -60,7 +60,6 @@ public class UI extends PApplet
             }
             if(bkimage == woman)
             {
-                int analyse = 0;
                 for(int i = 0; i <= 2; i++)
                 {
                     Display d = displays.get(i);
@@ -68,10 +67,6 @@ public class UI extends PApplet
                 }
                 if(areaselect != -1 && areaselect < 3)
                 {
-                    if(analyse == 0)
-                    {
-                        terminate = false;
-                    }
                     Display d = displays.get(areaselect);
                     float x = d.x;
                     float y = d.y;
@@ -80,19 +75,24 @@ public class UI extends PApplet
                     line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
                     text(d.getAnalysis() + " " + areaselect, x - 250, y + d.getSize()/4 - 60);
-                    analyse++;
+                    //analyse++;
+                    text(analyse,50,50);
                 }
-                if(analyse >= 3)
+                if(analyse == 3)
                 {
                     terminate = true;
                     textSize(20);
-                    text("ANALYSIS COMPLETE : BEGIN TERMINATION?",20,height-20);
-                    analyse = 0;
+                    text("ANALYSIS COMPLETE : BEGIN TERMINATION?",250,height-20);
+                }
+                if(analyse == 40)
+                {
+                    fill(255,0,0);
+                    textSize(150);
+                    text(testTerminate,width/2, height/2);
                 }
             }
             if(bkimage == man)
             {
-                int analyse = 0;
                 for(int i = 3; i < 6; i++)
                 {
                     Display d = displays.get(i);
@@ -100,9 +100,9 @@ public class UI extends PApplet
                 }
                 if(areaselect != -1 && areaselect > 2)
                 {
-                    if(analyse == 0)
+                    if(analyse != 0)
                     {
-                        terminate = false;
+                     terminate = false;
                     }
                     Display d = displays.get(areaselect);
                     float x = d.x;
@@ -112,14 +112,12 @@ public class UI extends PApplet
                     line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
                     text(d.getAnalysis() + " " + areaselect, x - 250, y + d.getSize()/4 - 60);
-                    analyse++;
                 }
-                if(analyse >= 3)
+                if(analyse == 3)
                 {
                     terminate = true;
                     textSize(20);
-                    text("ANALYSIS COMPLETE : BEGIN TERMINATION?",20,height-20);
-                    analyse = 0;
+                    text("ANALYSIS COMPLETE : BEGIN TERMINATION?",250,height-20);
                 }
             }
             targeting.targeticon();
@@ -165,6 +163,7 @@ public class UI extends PApplet
     {
         if(bkimage == alley && mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
         {
+            analyse = 0;
             bkimage = woman;
             areaselect = -1;
             
@@ -183,6 +182,10 @@ public class UI extends PApplet
                 if(mouseX < x + displays.get(i).getSize() && mouseX > x && mouseY < y + displays.get(i).getSize() && mouseY > y)
                 {
                     areaselect = i;
+                    if(analyse != 3)
+                    {
+                        analyse++;
+                    }
                 }
             }
         }
@@ -200,39 +203,18 @@ public class UI extends PApplet
         }
 
     }
-    
+    String testTerminate;
     public void keyPressed() {
-        /*if(key == 't' && terminate == true)
+        if(key == 't' && terminate == true)
         {
-        }*/
+            testTerminate = "TERMINATED";
+            analyse = 40;
+        }
         if(key == 'b' && bkimage != alley)
         {
             bkimage = alley;
         }
     }
-
-
-    /*public void searchmode()
-    {
-        
-        float centerx = width / 2;
-        float centery = height / 2;
-        
-        //fill(255);
-        stroke(255);
-        noFill();
-        ellipse(centerx, centery,width/(float)5.5,height/(float)5.5); //big circle
-        fill(255,0,0);
-        stroke(255);
-        line(centerx - width/11, centery, centerx + width/11, centery); //line across small circle
-        line(centerx,centery + 20, centerx, centery - 20); //tiny center line
-        fill(255);
-        textAlign(CENTER, CENTER);
-        textSize(50);
-        text("SEARCH MODE", centerx, centery + (height/6));
-        textSize(30);
-        
-    }*/
     float loadingbar = 0;
     public void loading()
     {
@@ -248,7 +230,6 @@ public class UI extends PApplet
         {
             
             loadingbar = 400;
-            text("ONLINE", width - 80, 50);
             fill(0,255,0);
             rect(centerx - 200, height - 150, loadingbar, 50);
             text("ACTIVATED", centerx, height/2 + (height/6) + 50);
@@ -268,14 +249,6 @@ public class UI extends PApplet
     int y= 0;
     public void design()
     {
-       
-       
-        
-        
-
-   
-
-        
         //line coming down
         stroke(255);
         line(0, y, width, y);
@@ -284,12 +257,6 @@ public class UI extends PApplet
         {
             y = 0; 
         }
-        
-        
-
-       
     }
-
-   
 }
 
