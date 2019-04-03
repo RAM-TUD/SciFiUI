@@ -60,8 +60,9 @@ public class UI extends PApplet
             if(bkimage == woman)
             {
                 int analyse = 0;
-                for(Display d: displays)
+                for(int i = 0; i < 2; i++)
                 {
+                    Display d = displays.get(i);
                     d.render();
                 }
                 if(areaselect != -1)
@@ -77,7 +78,39 @@ public class UI extends PApplet
                     line(x - 150, y + d.getSize()/4, x - 150, y + d.getSize()/4 - 30 );
                     line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
-                    text(d.getAnalysis(), x - 250, y + d.getSize()/4 - 60);
+                    text(d.getAnalysis() + " " + areaselect, x - 250, y + d.getSize()/4 - 60);
+                    analyse++;
+                }
+                if(analyse >= 3)
+                {
+                    terminate = true;
+                    textSize(20);
+                    text("ANALYSIS COMPLETE : BEGIN TERMINATION?",20,height-20);
+                    analyse = 0;
+                }
+            }
+            if(bkimage == man)
+            {
+                int analyse = 0;
+                for(int i = 3; i < 5; i++)
+                {
+                    Display d = displays.get(i);
+                    d.render();
+                }
+                if(areaselect != -1)
+                {
+                    if(analyse == 0)
+                    {
+                        terminate = false;
+                    }
+                    Display d = displays.get(areaselect);
+                    float x = d.x;
+                    float y = d.y;
+                    line(x, y + d.getSize()/4, x - 150, y + d.getSize()/4 );
+                    line(x - 150, y + d.getSize()/4, x - 150, y + d.getSize()/4 - 30 );
+                    line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
+                    textSize(15);
+                    text(d.getAnalysis() + " " + areaselect, x - 250, y + d.getSize()/4 - 60);
                     analyse++;
                 }
                 if(analyse >= 3)
@@ -111,6 +144,8 @@ public class UI extends PApplet
         displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM"));
         displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45"));
         displays.add(new Display(width/2 - 70, height - 150,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS"));
+        displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH "));
+        displays.add(new Display(300, height/2,this,150,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED"));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -131,7 +166,7 @@ public class UI extends PApplet
         {
             bkimage = man;
         }
-        if(bkimage == woman)
+        if(bkimage == woman | bkimage == man)
         {
             for(int i = 0; i < displays.size(); i++)
             {
