@@ -6,6 +6,8 @@ import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import processing.core.PApplet;
 import processing.core.PImage;
+import processing.data.Table;
+import processing.data.TableRow;
 
 public class UI extends PApplet
 {
@@ -21,6 +23,7 @@ public class UI extends PApplet
     Targeting targeting;
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
     ArrayList<Display> displays = new ArrayList<Display>();
+    ArrayList<Specs> specs = new ArrayList<Specs>();
     boolean online = false;
     boolean terminate = false;
     AudioPlayer file;
@@ -262,6 +265,15 @@ public class UI extends PApplet
         if (y > height)
         {
             y = 0; 
+        }
+    }
+    public void loadSpec()
+    {
+        Table table = loadTable("specs.csv","header");
+        for(TableRow row:table.rows())
+        {
+            Specs spec = new Specs(row);
+            specs.add(spec);
         }
     }
 }
