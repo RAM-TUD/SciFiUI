@@ -28,6 +28,7 @@ public class UI extends PApplet
     boolean terminate;
     AudioPlayer file;
     Minim minim;
+    SearchMode searchmode;
     
     public void settings()
     {
@@ -40,7 +41,7 @@ public class UI extends PApplet
         background(bkimage);
         if(online == false)
         {
-            searchmode();
+            searchmode.render();
             loading();
         }
         if(online == true)
@@ -55,7 +56,7 @@ public class UI extends PApplet
                     elements.get(i).render();
                 }
                 design();
-                searchmode();
+                searchmode.render();
             }
             if(bkimage == woman)
             {
@@ -128,6 +129,7 @@ public class UI extends PApplet
     }
     public void setup()
     {
+        searchmode = new SearchMode(this);
         minim = new Minim(this);
         file = minim.loadFile("Theyre-Here.mp3", 2000);
         file.play();
@@ -210,7 +212,7 @@ public class UI extends PApplet
     }
 
 
-    public void searchmode()
+    /*public void searchmode()
     {
         
         float centerx = width / 2;
@@ -230,7 +232,7 @@ public class UI extends PApplet
         text("SEARCH MODE", centerx, centery + (height/6));
         textSize(30);
         
-    }
+    }*/
     float loadingbar = 0;
     public void loading()
     {

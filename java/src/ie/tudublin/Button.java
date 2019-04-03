@@ -17,10 +17,8 @@ public class Button extends UIElements
     public void render()
     { 
         ui.stroke(200,0,0);
-        ui.fill(255);
+        ui.fill(255,0,0,100);
         ui.rect(x,y,size,size);
-        
-      
     }
    
 
