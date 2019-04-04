@@ -57,7 +57,7 @@ public class UI extends PApplet
                 {
                     fill(255);
                     textSize(35);
-                    text("TARGET ELIMINATED: MISSION SUCESS",width/2,200);
+                    text("TARGET ELIMINATED: MISSION SUCCESS",width/2,200);
                 }
                 textSize(30);
                 text("ONLINE", width - 80, 50);
