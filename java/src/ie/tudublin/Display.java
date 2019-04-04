@@ -6,6 +6,7 @@ public class Display extends UIElements
 {
     private float size;
     private String analysis;
+    private boolean visited;
     
     public Display(float x, float y, PApplet ui, float size, String analysis)
     {
@@ -48,4 +49,19 @@ public class Display extends UIElements
     public void setAnalysis(String analysis) {
         this.analysis = analysis;
     }
+
+    /**
+     * @return the visited
+     */
+    public boolean isVisited() {
+        return visited;
+    }
+
+    /**
+     * @param visited the visited to set
+     */
+    public void setVisited(boolean visited) {
+        this.visited = visited;
+    }
+
 }

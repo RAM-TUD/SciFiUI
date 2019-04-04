@@ -5,7 +5,7 @@ import processing.data.TableRow;
 public class Specs
 {
     private String version;
-    private  String corps;
+    private String corps;
     private String features;
 
     public Specs(TableRow row)
