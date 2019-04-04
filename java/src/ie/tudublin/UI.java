@@ -220,11 +220,16 @@ public class UI extends PApplet
                 float y = displays.get(i).y;
                 if(mouseX < x + displays.get(i).getSize() && mouseX > x && mouseY < y + displays.get(i).getSize() && mouseY > y)
                 {
-                    areaselect = i;
-                if(analyse != 3)
-                {
-                    analyse++;
-                }
+                    if(displays.get(i).isVisited() == false)
+                    {
+                        areaselect = i;
+                        displays.get(i).setVisited(true);
+                        if(analyse != 3)
+                        {
+                            analyse++;
+                        }
+                    } 
+                
                 }
             }
         }
