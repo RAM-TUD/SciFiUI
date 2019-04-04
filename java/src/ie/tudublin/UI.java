@@ -80,7 +80,6 @@ public class UI extends PApplet
                 }
                 for(int i =0; i <area.length;i++)
                 {
-                    //if(areaselect != -1 && areaselect < 3)
                     if(area[i] != -1 && area[i] < 3)  
                 {
                     Display d = displays.get(area[i]);
@@ -115,16 +114,19 @@ public class UI extends PApplet
                     Display d = displays.get(i);
                     d.render();
                 }
-                if(areaselect != -1 && areaselect > 2)
+                for(int i =0; i<area.length;i++)
                 {
-                    Display d = displays.get(areaselect);
+                    if(area[i] != -1 && area[i] > 2)
+                    {
+                    Display d = displays.get(area[i]);
                     float x = d.x;
                     float y = d.y;
                     line(x, y + d.getSize()/4, x - 150, y + d.getSize()/4 );
                     line(x - 150, y + d.getSize()/4, x - 150, y + d.getSize()/4 - 30 );
                     line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
-                    text(d.getAnalysis() + " " + areaselect, x - 250, y + d.getSize()/4 - 60);
+                    text(d.getAnalysis() + " " + area[i], x - 250, y + d.getSize()/4 - 60);
+                    }
                 }
                 if(analyse == 3)
                 {
@@ -180,7 +182,6 @@ public class UI extends PApplet
         bkimage = offline;
         loadSpec();
      }
-    int areaselect = -1;
     int[] area = new int[3];    
     public void mousePressed()
     {
@@ -192,14 +193,15 @@ public class UI extends PApplet
             }
             analyse = 0;
             bkimage = woman;
-            //areaselect = -1;
-            
         }
         if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300 && killedMan == false)
         {
+            for(int i = 0; i < area.length; i++)
+            {
+                area[i] = -1;
+            }
             analyse = 0;
             bkimage = man;
-            areaselect = -1;
         }
         if(bkimage == woman)
         {
@@ -212,7 +214,6 @@ public class UI extends PApplet
                     if(displays.get(i).isVisited() == false)
                     {
                         area[analyse] = i;
-                        //areaselect = i;
                         displays.get(i).setVisited(true);
                         if(analyse != 3)
                         {
@@ -232,7 +233,7 @@ public class UI extends PApplet
                 {
                     if(displays.get(i).isVisited() == false)
                     {
-                        areaselect = i;
+                        area[analyse] = i;
                         displays.get(i).setVisited(true);
                         if(analyse != 3)
                         {
