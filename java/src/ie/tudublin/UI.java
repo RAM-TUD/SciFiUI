@@ -30,6 +30,8 @@ public class UI extends PApplet
     Minim minim;
     SearchMode searchmode;
     int analyse;
+    boolean killedWoman = false;
+    boolean killedMan = false;
     
     public void settings()
     {
@@ -53,8 +55,14 @@ public class UI extends PApplet
                 textSize(30);
                 text("ONLINE", width - 80, 50);
                 printSpec();
-                targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
-                targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
+                if(killedMan == false)
+                {
+                    targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
+                }
+                if(killedWoman == false)
+                {
+                    targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
+                }
                 targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
                 for(int i = 0 ; i < elements.size() ; i ++)
                 {
@@ -93,6 +101,7 @@ public class UI extends PApplet
                     fill(255,0,0);
                     textSize(150);
                     text(testTerminate,width/2, height/2);
+                    killedWoman = true;
                 }
             }
             if(bkimage == man)
@@ -124,6 +133,7 @@ public class UI extends PApplet
                     fill(255,0,0);
                     textSize(150);
                     text(testTerminate,width/2, height/2);
+                    killedMan = true;
                 }
             }
             targeting.targeticon();
@@ -169,14 +179,14 @@ public class UI extends PApplet
     int areaselect = -1;    
     public void mousePressed()
     {
-        if(bkimage == alley && mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 )
+        if(bkimage == alley && mouseX > 750 && mouseX < 750 + 270 && mouseY > height/2 - 40 && mouseY < height/2 - 40 + 250 && killedWoman == false)
         {
             analyse = 0;
             bkimage = woman;
             areaselect = -1;
             
         }
-        if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300)
+        if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300 && killedMan == false)
         {
             analyse = 0;
             bkimage = man;
@@ -222,6 +232,7 @@ public class UI extends PApplet
         {
             testTerminate = "TERMINATED";
             analyse = 40;
+
         }
         if(key == 'b' && bkimage != alley)
         {
