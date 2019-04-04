@@ -32,6 +32,7 @@ public class UI extends PApplet
     int analyse;
     boolean killedWoman = false;
     boolean killedMan = false;
+    PImage dead;
     
     public void settings()
     {
@@ -52,6 +53,12 @@ public class UI extends PApplet
             
             if(bkimage == alley)
             {
+                if(killedMan == true)
+                {
+                    fill(255);
+                    textSize(35);
+                    text("TARGET ELIMINATED: MISSION SUCESS",width/2,200);
+                }
                 textSize(30);
                 text("ONLINE", width - 80, 50);
                 printSpec();
@@ -101,9 +108,10 @@ public class UI extends PApplet
                 }
                 if(analyse == 40)
                 {
-                    fill(255,0,0);
-                    textSize(150);
-                    text(testTerminate,width/2, height/2);
+                    bkimage = dead;
+                    // fill(255,0,0);
+                    // textSize(150);
+                    // text(testTerminate,width/2, height/2);
                     killedWoman = true;
                 }
             }
@@ -136,12 +144,30 @@ public class UI extends PApplet
                 }
                 if(analyse == 40)
                 {
-                    fill(255,0,0);
-                    textSize(150);
-                    text(testTerminate,width/2, height/2);
+                    bkimage = dead;
+                    // fill(255,0,0);
+                    // textSize(150);
+                    // text(testTerminate,width/2, height/2);
                     killedMan = true;
                 }
             }
+            if(bkimage == dead)
+            {
+                fill(255,0,0);
+                textSize(150);
+                text(testTerminate,width/2, height/2);
+            }
+            // if(bkimage == man || bkimage == woman)
+            // {
+            //     if(nkimage == dead)
+            //     {
+            //         bki
+            //         fill(255,0,0);
+            //         textSize(150);
+            //         text(testTerminate,width/2, height/2);
+            //         killedWoman = true;
+            //     }
+            // }
             targeting.targeticon();
             
         }
@@ -179,6 +205,7 @@ public class UI extends PApplet
         pedestrian3 = targeting.loadtarget("soldier.png");
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
+        dead = loadImage("dead.jpg");
         bkimage = offline;
         loadSpec();
      }
