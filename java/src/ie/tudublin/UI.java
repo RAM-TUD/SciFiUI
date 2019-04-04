@@ -33,6 +33,8 @@ public class UI extends PApplet
     boolean killedWoman = false;
     boolean killedMan = false;
     PImage dead;
+    AudioPlayer scan;
+    AudioPlayer intro;
     
     public void settings()
     {
@@ -109,9 +111,6 @@ public class UI extends PApplet
                 if(analyse == 40)
                 {
                     bkimage = dead;
-                    // fill(255,0,0);
-                    // textSize(150);
-                    // text(testTerminate,width/2, height/2);
                     killedWoman = true;
                 }
             }
@@ -145,9 +144,6 @@ public class UI extends PApplet
                 if(analyse == 40)
                 {
                     bkimage = dead;
-                    // fill(255,0,0);
-                    // textSize(150);
-                    // text(testTerminate,width/2, height/2);
                     killedMan = true;
                 }
             }
@@ -157,17 +153,6 @@ public class UI extends PApplet
                 textSize(150);
                 text(testTerminate,width/2, height/2);
             }
-            // if(bkimage == man || bkimage == woman)
-            // {
-            //     if(nkimage == dead)
-            //     {
-            //         bki
-            //         fill(255,0,0);
-            //         textSize(150);
-            //         text(testTerminate,width/2, height/2);
-            //         killedWoman = true;
-            //     }
-            // }
             targeting.targeticon();
             
         }
@@ -178,7 +163,9 @@ public class UI extends PApplet
         searchmode = new SearchMode(this);
         minim = new Minim(this);
         file = minim.loadFile("Theyre-Here.mp3", 2000);
-        file.loop();
+        scan = minim.loadFile("scan.mp3", 2000);
+        intro = minim.loadFile("intro.mp3", 2000);
+        file.loop(10);
         file.play();
         alley = loadImage("street.jpg");
         offline = loadImage("back.jpg");
@@ -242,6 +229,7 @@ public class UI extends PApplet
                     {
                         area[analyse] = i;
                         displays.get(i).setVisited(true);
+                        scan.play();
                         if(analyse != 3)
                         {
                             analyse++;
@@ -306,6 +294,7 @@ public class UI extends PApplet
             text("ACTIVATED", centerx, height/2 + (height/6) + 50);
             online = true;
             bkimage = alley;
+            intro.play();
             
         }
         else
