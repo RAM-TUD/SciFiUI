@@ -162,11 +162,11 @@ public class UI extends PApplet
     {
         searchmode = new SearchMode(this);
         minim = new Minim(this);
-        file = minim.loadFile("Theyre-Here.mp3", 2000);
-        scan = minim.loadFile("scan.mp3", 2000);
-        intro = minim.loadFile("intro.mp3", 2000);
-        file.loop(10);
+        file = minim.loadFile("Theyre-Here.mp3");
+        scan = minim.loadFile("scan.mp3");
+        intro = minim.loadFile("intro.mp3");
         file.play();
+        file.loop();
         alley = loadImage("street.jpg");
         offline = loadImage("back.jpg");
         elements.add(new CircleUI(this,100,100,50));
@@ -230,6 +230,7 @@ public class UI extends PApplet
                         area[analyse] = i;
                         displays.get(i).setVisited(true);
                         scan.play();
+                        scan.rewind();
                         if(analyse != 3)
                         {
                             analyse++;
@@ -249,6 +250,8 @@ public class UI extends PApplet
                     if(displays.get(i).isVisited() == false)
                     {
                         area[analyse] = i;
+                        scan.play();
+                        scan.rewind();
                         displays.get(i).setVisited(true);
                         if(analyse != 3)
                         {
@@ -272,6 +275,7 @@ public class UI extends PApplet
         if(key == 'b' && bkimage != alley)
         {
             bkimage = alley;
+            analyse = 0;
         }
     }
     float loadingbar = 0;
