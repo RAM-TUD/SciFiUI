@@ -9,7 +9,7 @@ import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
 
-public class UI extends PApplet
+public class UI<womanscream> extends PApplet
 {
     PImage alley;
     PImage offline;
@@ -35,6 +35,7 @@ public class UI extends PApplet
     PImage dead;
     AudioPlayer scan;
     AudioPlayer intro;
+    AudioPlayer womanscream;
     
     public void settings()
     {
@@ -110,8 +111,16 @@ public class UI extends PApplet
                 }
                 if(analyse == 40)
                 {
-                    bkimage = dead;
-                    killedWoman = true;
+                    for(int i = 0; i < 20; i++)
+                    {
+                        float liney = random(0,height);
+                        line(0,liney,width,liney);
+                    }
+                    if(womanscream.isPlaying() == false)
+                    {
+                        bkimage = dead;
+                        killedWoman = true;
+                    }
                 }
             }
             if(bkimage == man)
@@ -165,6 +174,7 @@ public class UI extends PApplet
         file = minim.loadFile("Theyre-Here.mp3");
         scan = minim.loadFile("scan.mp3");
         intro = minim.loadFile("intro.mp3");
+        womanscream = minim.loadFile("womanscream.mp3");
         file.play();
         file.loop();
         alley = loadImage("street.jpg");
@@ -195,6 +205,7 @@ public class UI extends PApplet
         dead = loadImage("dead.jpg");
         bkimage = offline;
         loadSpec();
+        
      }
     int[] area = new int[3];    
     public void mousePressed()
@@ -270,6 +281,7 @@ public class UI extends PApplet
         {
             testTerminate = "TERMINATED";
             analyse = 40;
+            womanscream.play();
 
         }
         if(key == 'b' && bkimage != alley)
