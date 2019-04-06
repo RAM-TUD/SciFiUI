@@ -36,6 +36,7 @@ public class UI<womanscream> extends PApplet
     AudioPlayer scan;
     AudioPlayer intro;
     AudioPlayer womanscream;
+    AudioPlayer manscream;
     
     public void settings()
     {
@@ -111,7 +112,7 @@ public class UI<womanscream> extends PApplet
                 }
                 if(analyse == 40)
                 {
-                    for(int i = 0; i < 20; i++)
+                    for(int i = 0; i < 10; i++)
                     {
                         float liney = random(0,height);
                         line(0,liney,width,liney);
@@ -152,8 +153,16 @@ public class UI<womanscream> extends PApplet
                 }
                 if(analyse == 40)
                 {
-                    bkimage = dead;
-                    killedMan = true;
+                    for(int i = 0; i < 10; i++)
+                    {
+                        float liney = random(0,height);
+                        line(0,liney,width,liney);
+                    }
+                    if(manscream.isPlaying() == false)
+                    {
+                        bkimage = dead;
+                        killedMan = true;
+                    }
                 }
             }
             if(bkimage == dead)
@@ -175,6 +184,7 @@ public class UI<womanscream> extends PApplet
         scan = minim.loadFile("scan.mp3");
         intro = minim.loadFile("intro.mp3");
         womanscream = minim.loadFile("womanscream.mp3");
+        manscream = minim.loadFile("manscream.mp3");
         file.play();
         file.loop();
         alley = loadImage("street.jpg");
@@ -281,8 +291,14 @@ public class UI<womanscream> extends PApplet
         {
             testTerminate = "TERMINATED";
             analyse = 40;
-            womanscream.play();
-
+            if(bkimage == woman)
+            {
+                womanscream.play();
+            }
+            else if(bkimage == man)
+            {
+                manscream.play();
+            }
         }
         if(key == 'b' && bkimage != alley)
         {
