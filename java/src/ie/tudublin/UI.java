@@ -284,6 +284,7 @@ public class UI<womanscream> extends PApplet
             }
             analyse = 0;
             bkimage = woman;
+            threatlevel = 0;
         }
         if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300 && killedMan == false)
         {
@@ -293,10 +294,10 @@ public class UI<womanscream> extends PApplet
             }
             analyse = 0;
             bkimage = man;
+            threatlevel = 0;
         }
         if(bkimage == woman)
         {
-            threatlevel = 0;
             for(int i = 0; i < 3; i++)
             {
                 float x = displays.get(i).x;
@@ -309,9 +310,10 @@ public class UI<womanscream> extends PApplet
                         displays.get(i).setVisited(true);
                         scan.play();
                         scan.rewind();
-                        threatlevel += displays.get(i).getIncreasethreat();
+                        
                         if(analyse != 3)
                         {
+                            threatlevel += displays.get(i).getIncreasethreat();
                             analyse++;
                         }
                     }  
@@ -320,7 +322,7 @@ public class UI<womanscream> extends PApplet
         }
         if(bkimage == man)
         {
-            threatlevel = 0;
+            
             for(int i = 3; i < 6; i++)
             {
                 float x = displays.get(i).x;
@@ -333,9 +335,9 @@ public class UI<womanscream> extends PApplet
                         scan.play();
                         scan.rewind();
                         displays.get(i).setVisited(true);
-                        threatlevel += displays.get(i).getIncreasethreat();
                         if(analyse != 3)
                         {
+                            threatlevel += displays.get(i).getIncreasethreat();
                             analyse++;
                         }
                     } 
