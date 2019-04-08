@@ -39,6 +39,7 @@ public class UI<womanscream> extends PApplet
     AudioPlayer manscream;
     int threatlevel;
     
+    
     public void settings()
     {
         fullScreen();
@@ -173,7 +174,7 @@ public class UI<womanscream> extends PApplet
                 else if(threatlevel > 30 && threatlevel < 60)
                 {
                     fill(255,255,0);
-                    text("-OPTIMAL LEVEL: BE WARY",515,50);
+                    text("-OPTIMAL THREAT LEVEL: BE WARY",515,50);
                     fill(255);
                 }
                 else if(threatlevel > 60)
@@ -186,6 +187,16 @@ public class UI<womanscream> extends PApplet
                 {
                     Display d = displays.get(i);
                     d.render();
+                    if(d.isTrigger() == true)
+                    {
+                        fill(255,0,0,100);
+                        rect(d.x,d.y,d.getSize(),d.getSize());
+                        line(d.x+d.getSize(),d.y + d.getSize()/2,d.x+d.getSize() + 100,d.y + d.getSize()/2);
+                        fill(255);
+                        textSize(15);
+                        text("THREAT NEUTRILIZED",d.x+d.getSize()+50,d.y-10);
+                        
+                    }
                 }
                 for(int i =0; i<area.length;i++)
                 {
@@ -199,6 +210,7 @@ public class UI<womanscream> extends PApplet
                     line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
                     textSize(15);
                     text(d.getAnalysis() + " " + area[i], x - 250, y + d.getSize()/4 - 60);
+                  
                     }
                 }
                 if(analyse == 3)
@@ -256,12 +268,12 @@ public class UI<womanscream> extends PApplet
         { 
             elements.add(new Button(this,350 + (i*80),50,50));
         }
-        displays.add(new Display(width/2 - 100, height - 200,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS",5));
-        displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM",3));
-        displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45",7));
-        displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH ",9));
-        displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED",15));
-        displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED",34));
+        displays.add(new Display(width/2 - 100, height - 200,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS",5,false));
+        displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM",3,false));
+        displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45",7,false));
+        displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH ",9,false));
+        displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED",15,false));
+        displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED",34,true));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -349,7 +361,7 @@ public class UI<womanscream> extends PApplet
     }
     String testTerminate;
     public void keyPressed() {
-        if(key == 't' && terminate == true)
+        if(key == 't' && analyse == 3)
         {
             testTerminate = "TERMINATED";
             analyse = 40;
@@ -366,6 +378,14 @@ public class UI<womanscream> extends PApplet
         {
             bkimage = alley;
             analyse = 0;
+        }
+        for(Display d:displays)
+        {
+            if(d.isHasEvent() == true && d.isVisited() && key == 'k')
+            {
+                d.setTrigger(true);
+                threatlevel -= d.getIncreasethreat() - 20;
+            }
         }
     }
     float loadingbar = 0;

@@ -8,13 +8,16 @@ public class Display extends UIElements
     private String analysis;
     private boolean visited;
     private int Increasethreat;
+    private boolean hasEvent;
+    private boolean trigger;
     
-    public Display(float x, float y, PApplet ui, float size, String analysis, int Increasethreat)
+    public Display(float x, float y, PApplet ui, float size, String analysis, int Increasethreat, boolean hasEvent)
     {
         super(x,y,ui);
         this.size = size;
         this.analysis = analysis;
         this.Increasethreat = Increasethreat;
+        this.hasEvent = hasEvent;
     }
 
     public void render()
@@ -78,6 +81,34 @@ public class Display extends UIElements
      */
     public void setIncreasethreat(int increasethreat) {
         Increasethreat = increasethreat;
+    }
+
+    /**
+     * @return the hasEvent
+     */
+    public boolean isHasEvent() {
+        return hasEvent;
+    }
+
+    /**
+     * @param hasEvent the hasEvent to set
+     */
+    public void setHasEvent(boolean hasEvent) {
+        this.hasEvent = hasEvent;
+    }
+
+    /**
+     * @return the trigger
+     */
+    public boolean isTrigger() {
+        return trigger;
+    }
+
+    /**
+     * @param trigger the trigger to set
+     */
+    public void setTrigger(boolean trigger) {
+        this.trigger = trigger;
     }
 
 }
