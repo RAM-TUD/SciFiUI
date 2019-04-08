@@ -7,12 +7,14 @@ public class Weapon extends UIElements
     private float size;
     private float length;
     private float rotation;
+    private boolean enabled;
     public Weapon(float x, float y, PApplet ui, float size, float length)
     {
         super(x,y,ui);
         this.size = size;
         this.length = length;
         this.rotation = 0;
+        this.enabled = enabled;
     }
 
     public void render()
@@ -23,8 +25,8 @@ public class Weapon extends UIElements
         ui.rect(x,y+size/2,size,length+30);
         ui.fill(255);
         ui.textSize(12);
-        ui.text("WEAPON SYSTEM",x+size/2,y+size/3/2);
-        ui.text("ENABLE", x + size/2, y + length + 60);
+        ui.text("ENABLE",x+size/2,y+size/3/2);
+        ui.text("WEAPON SYSTEMS", x + size/2, y + length + 60);
 
         ui.fill(255,50);
         float trix = x + size/2;
@@ -50,6 +52,62 @@ public class Weapon extends UIElements
         rotation += 0.05f;
 
 
+    }
+
+    /**
+     * @return the size
+     */
+    public float getSize() {
+        return size;
+    }
+
+    /**
+     * @param size the size to set
+     */
+    public void setSize(float size) {
+        this.size = size;
+    }
+
+    /**
+     * @return the length
+     */
+    public float getLength() {
+        return length;
+    }
+
+    /**
+     * @param length the length to set
+     */
+    public void setLength(float length) {
+        this.length = length;
+    }
+
+    /**
+     * @return the rotation
+     */
+    public float getRotation() {
+        return rotation;
+    }
+
+    /**
+     * @param rotation the rotation to set
+     */
+    public void setRotation(float rotation) {
+        this.rotation = rotation;
+    }
+
+    /**
+     * @return the enabled
+     */
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    /**
+     * @param enabled the enabled to set
+     */
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
 }

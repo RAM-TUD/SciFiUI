@@ -159,6 +159,7 @@ public class UI<womanscream> extends PApplet
             {
                 weapon.render();
                 textSize(20);
+                fill(255);
                 if(analyse == 0)
                 {
                     text("CURRENT THREAT LEVEL: UNKNOWN",200,50);
@@ -189,16 +190,16 @@ public class UI<womanscream> extends PApplet
                 {
                     Display d = displays.get(i);
                     d.render();
-                    if(d.isTrigger() == true)
-                    {
-                        fill(255,0,0,100);
-                        rect(d.x,d.y,d.getSize(),d.getSize());
-                        line(d.x+d.getSize(),d.y + d.getSize()/2,d.x+d.getSize() + 100,d.y + d.getSize()/2);
-                        fill(255);
-                        textSize(15);
-                        text("THREAT NEUTRILIZED",d.x+d.getSize()+50,d.y-10);
+                     if(d.isTrigger() == true)
+                     {
+                         fill(255,0,0,100);
+                         rect(d.x,d.y,d.getSize(),d.getSize());
+                         line(d.x+d.getSize(),d.y + d.getSize()/2,d.x+d.getSize() + 100,d.y + d.getSize()/2);
+                         fill(255);
+                         textSize(15);
+                         text("THREAT NEUTRILIZED",d.x+d.getSize()+50,d.y-10);
                         
-                    }
+                     }
                 }
                 for(int i =0; i<area.length;i++)
                 {
@@ -241,7 +242,13 @@ public class UI<womanscream> extends PApplet
                 textSize(150);
                 text(testTerminate,width/2, height/2);
             }
-            targeting.targeticon();
+            if(weapon.isEnabled() == false)
+            {
+                targeting.targeticon();
+            }
+            else{
+                targeting.weapontarget();
+            }
             
         }
     
@@ -337,6 +344,10 @@ public class UI<womanscream> extends PApplet
         }
         if(bkimage == man)
         {
+            if(mouseX > weapon.x && mouseX < weapon.x + weapon.getLength() + 50 && mouseY >weapon.y &&  mouseY <weapon.y+weapon.getSize()/2 && weapon.isEnabled() == false)
+            {
+                weapon.setEnabled(true);
+            }
             
             for(int i = 3; i < 6; i++)
             {
@@ -355,7 +366,12 @@ public class UI<womanscream> extends PApplet
                             threatlevel += displays.get(i).getIncreasethreat();
                             analyse++;
                         }
-                    } 
+                    }
+                    if(displays.get(i).isVisited() == true && weapon.isEnabled() == true)
+                    {
+                        displays.get(i).setTrigger(true);
+                    }
+                    
                 
                 }
             }

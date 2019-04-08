@@ -52,4 +52,14 @@ public class Targeting
         ui.image(name,x,y,size,length);
     }
 
+    public void weapontarget()
+    {
+        ui.stroke(200,150,0);
+        ui.line(ui.mouseX, ui.mouseY + radius + 10, ui.mouseX, ui.mouseY - radius - 10);
+        ui.line(ui.mouseX - radius - 10, ui.mouseY, ui.mouseX + radius + 10, ui.mouseY);
+        ui.stroke(255,0,0);
+        ui.noFill();
+        ui.ellipse(ui.mouseX, ui.mouseY, diameter,diameter);
+    }
+
 }
