@@ -7,12 +7,14 @@ public class Display extends UIElements
     private float size;
     private String analysis;
     private boolean visited;
+    private int Increasethreat;
     
-    public Display(float x, float y, PApplet ui, float size, String analysis)
+    public Display(float x, float y, PApplet ui, float size, String analysis, int Increasethreat)
     {
         super(x,y,ui);
         this.size = size;
         this.analysis = analysis;
+        this.Increasethreat = Increasethreat;
     }
 
     public void render()
@@ -62,6 +64,20 @@ public class Display extends UIElements
      */
     public void setVisited(boolean visited) {
         this.visited = visited;
+    }
+
+    /**
+     * @return the increasethreat
+     */
+    public int getIncreasethreat() {
+        return Increasethreat;
+    }
+
+    /**
+     * @param increasethreat the increasethreat to set
+     */
+    public void setIncreasethreat(int increasethreat) {
+        Increasethreat = increasethreat;
     }
 
 }

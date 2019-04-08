@@ -11,7 +11,7 @@ public class Grid extends UIElements
     PImage target;
     
 
-    public Grid(PApplet ui,float x, float y, float distance)
+    public Grid(PApplet ui,float x, float y, float distance) // constructor
     {
         super(x,y,ui);
         this.distance = distance;

@@ -37,6 +37,7 @@ public class UI<womanscream> extends PApplet
     AudioPlayer intro;
     AudioPlayer womanscream;
     AudioPlayer manscream;
+    int threatlevel;
     
     public void settings()
     {
@@ -84,6 +85,34 @@ public class UI<womanscream> extends PApplet
             }
             if(bkimage == woman)
             {
+                
+                textSize(20);
+                if(analyse == 0)
+                {
+                    text("CURRENT THREAT LEVEL: UNKNOWN",200,100);
+                }
+                else
+                {
+                    text("CURRENT THREAT LEVEL: " + threatlevel + "%",200,100);
+                }
+                if(threatlevel < 30 && threatlevel > 0)
+                {
+                    fill(0,255,0);
+                    text("-THREAT LEVEL LOW, NO DANGER",515,100);
+                    fill(255);
+                }
+                else if(threatlevel > 30 && threatlevel < 60)
+                {
+                    fill(255,255,0);
+                    text("-OPTIMAL LEVEL: BE WARY",515,100);
+                    fill(255);
+                }
+                else if(threatlevel > 60)
+                {
+                    fill(255,0,0);
+                    text("DANGER: THREAT LEVEL HIGH",515,100);
+                    fill(255);
+                }
                 for(int i = 0; i <= 2; i++)
                 {
                     Display d = displays.get(i);
@@ -126,6 +155,33 @@ public class UI<womanscream> extends PApplet
             }
             if(bkimage == man)
             {
+                textSize(20);
+                if(analyse == 0)
+                {
+                    text("CURRENT THREAT LEVEL: UNKNOWN",200,50);
+                }
+                else
+                {
+                    text("CURRENT THREAT LEVEL: " + threatlevel + "%",200,50);
+                }
+                if(threatlevel < 30 && threatlevel > 0)
+                {
+                    fill(0,255,0);
+                    text("-THREAT LEVEL LOW, NO DANGER",515,50);
+                    fill(255);
+                }
+                else if(threatlevel > 30 && threatlevel < 60)
+                {
+                    fill(255,255,0);
+                    text("-OPTIMAL LEVEL: BE WARY",515,50);
+                    fill(255);
+                }
+                else if(threatlevel > 60)
+                {
+                    fill(255,0,0);
+                    text("DANGER: THREAT LEVEL HIGH",515,50);
+                    fill(255);
+                }
                 for(int i = 3; i < 6; i++)
                 {
                     Display d = displays.get(i);
@@ -200,12 +256,12 @@ public class UI<womanscream> extends PApplet
         { 
             elements.add(new Button(this,350 + (i*80),50,50));
         }
-        displays.add(new Display(width/2 - 100, height - 200,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS"));
-        displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM"));
-        displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45"));
-        displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH "));
-        displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED"));
-        displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED"));
+        displays.add(new Display(width/2 - 100, height - 200,this, 120, "OCCUPATION SECURED : OFFICE SECRETARY AT LUMINO CORPS",5));
+        displays.add(new Display(width/2 + 200, height/2 +50, this,150, "NO WEAPON IDENTIFIED|INCAPABLE OF SELF-DEFENSE: THREAT LEVEL MINIMUM",3));
+        displays.add(new Display(width/2 - 50,150,this,200,"TARGET IDENTIFIED : ANNA HOMES, GENDER: WOMAN | AGE 45",7));
+        displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH ",9));
+        displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED",15));
+        displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED",34));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -240,6 +296,7 @@ public class UI<womanscream> extends PApplet
         }
         if(bkimage == woman)
         {
+            threatlevel = 0;
             for(int i = 0; i < 3; i++)
             {
                 float x = displays.get(i).x;
@@ -252,6 +309,7 @@ public class UI<womanscream> extends PApplet
                         displays.get(i).setVisited(true);
                         scan.play();
                         scan.rewind();
+                        threatlevel += displays.get(i).getIncreasethreat();
                         if(analyse != 3)
                         {
                             analyse++;
@@ -262,6 +320,7 @@ public class UI<womanscream> extends PApplet
         }
         if(bkimage == man)
         {
+            threatlevel = 0;
             for(int i = 3; i < 6; i++)
             {
                 float x = displays.get(i).x;
@@ -274,6 +333,7 @@ public class UI<womanscream> extends PApplet
                         scan.play();
                         scan.rewind();
                         displays.get(i).setVisited(true);
+                        threatlevel += displays.get(i).getIncreasethreat();
                         if(analyse != 3)
                         {
                             analyse++;

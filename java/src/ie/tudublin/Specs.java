@@ -11,7 +11,7 @@ public class Specs
     public Specs(TableRow row)
     {
         this.version = row.getString("Version");
-        this.corps = row.getString("Oron Corps");
+        this.corps = row.getString("Cyberdene Systems");
         this.features = row.getString("Specification Features");
     }
 
