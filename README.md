@@ -1,8 +1,8 @@
 # SciFi UI Project
 
-Name:
+Name: Reda Ali Mohammed
 
-Student Number: 
+Student Number: C17456666 
 
 Fork this repository and use it a starter project for your assignment
 
