@@ -38,6 +38,7 @@ public class UI<womanscream> extends PApplet
     AudioPlayer womanscream;
     AudioPlayer manscream;
     int threatlevel;
+    Weapon weapon;
     
     
     public void settings()
@@ -156,6 +157,7 @@ public class UI<womanscream> extends PApplet
             }
             if(bkimage == man)
             {
+                weapon.render();
                 textSize(20);
                 if(analyse == 0)
                 {
@@ -260,6 +262,7 @@ public class UI<womanscream> extends PApplet
         elements.add(new CircleUI(this,100,100,50));
         elements.add(new Barchart(this, 30, height - 30));
         elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
+        weapon = new Weapon(width - 200, height/2 + 50, this, 150,180);
         for(int i = 0; i < 4; i++)
         {
             elements.add(new Numbers(width - 220, 170 + (i*30),this));
