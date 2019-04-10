@@ -9,7 +9,7 @@ import processing.core.PImage;
 import processing.data.Table;
 import processing.data.TableRow;
 
-public class UI<womanscream> extends PApplet
+public class UI extends PApplet
 {
     PImage alley;
     PImage offline;
@@ -39,6 +39,7 @@ public class UI<womanscream> extends PApplet
     AudioPlayer manscream;
     int threatlevel;
     Weapon weapon;
+    DefenseSystem shield;
     
     
     public void settings()
@@ -83,6 +84,7 @@ public class UI<womanscream> extends PApplet
                     elements.get(i).render();
                 }
                 design();
+                shield.render();
                 searchmode.render();
             }
             if(bkimage == woman)
@@ -269,7 +271,8 @@ public class UI<womanscream> extends PApplet
         elements.add(new CircleUI(this,100,100,50));
         elements.add(new Barchart(this, 30, height - 30));
         elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
-        weapon = new Weapon(width - 200, height/2 + 50, this, 150,180);
+        weapon = new Weapon(width - 200, height/2 + 50, 150,180,false,this);
+        shield = new Shield(50,height/2-100,200,300,false,this);
         for(int i = 0; i < 4; i++)
         {
             elements.add(new Numbers(width - 220, 170 + (i*30),this));

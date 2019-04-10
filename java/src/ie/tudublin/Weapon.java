@@ -2,19 +2,16 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Weapon extends UIElements
+public class Weapon extends DefenseSystem
 {
-    private float size;
-    private float length;
+    
     private float rotation;
-    private boolean enabled;
-    public Weapon(float x, float y, PApplet ui, float size, float length)
+    
+    public Weapon(float x, float y, float size, float length, boolean enabled, PApplet ui)
     {
-        super(x,y,ui);
-        this.size = size;
-        this.length = length;
+        super(x,y,size,length,enabled,ui);
         this.rotation = 0;
-        this.enabled = enabled;
+       
     }
 
     public void render()
