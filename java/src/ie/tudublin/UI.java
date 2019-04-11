@@ -39,7 +39,7 @@ public class UI extends PApplet
     AudioPlayer manscream;
     int threatlevel;
     Weapon weapon;
-    DefenseSystem shield;
+    Shield shield;
     
     
     public void settings()
@@ -68,8 +68,13 @@ public class UI extends PApplet
                     text("TARGET ELIMINATED: MISSION SUCCESS",width/2,200);
                 }
                 textSize(30);
-                text("ONLINE", width - 80, 50);
+                //text("ONLINE", width - 80, 50);
+                if(shield.enabled == false)
+                {
+                    text("ONLINE", width - 80, 50);   
+                }
                 printSpec();
+                
                 if(killedMan == false)
                 {
                     targeting.targets(pedestrian1,300, height/2 - 50, 100, 300);
@@ -86,6 +91,11 @@ public class UI extends PApplet
                 design();
                 shield.render();
                 searchmode.render();
+                float shieldh = shield.y+shield.length-20;
+                if(shield.enabled == true && mouseY < shieldh && mouseY > shield.y+20)
+                {
+                    shield.setButtonheight(mouseY);
+                }
             }
             if(bkimage == woman)
             {
@@ -311,6 +321,12 @@ public class UI extends PApplet
             bkimage = woman;
             threatlevel = 0;
         }
+        float triggerx = shield.x+shield.size/2-20;
+        float triggery = shield.y+shield.length-20;
+        if(mouseX > triggerx && mouseX < triggerx + 40 && mouseY > triggery && mouseY < triggery + 20)
+        {
+            shield.enabled = true;
+        }
         if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300 && killedMan == false)
         {
             for(int i = 0; i < area.length; i++)
@@ -383,6 +399,10 @@ public class UI extends PApplet
     }
     String testTerminate;
     public void keyPressed() {
+        if(bkimage == alley && shield.enabled == true && key == 'c')
+        {
+            shield.enabled = false;
+        }
         if(key == 't' && analyse == 3)
         {
             testTerminate = "TERMINATED";
