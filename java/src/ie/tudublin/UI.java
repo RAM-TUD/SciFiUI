@@ -39,8 +39,10 @@ public class UI extends PApplet
     AudioPlayer manscream;
     int threatlevel;
     Weapon weapon;
-    Shield shield;
-    
+    ShieldGenerator shield;
+    Shield barrier;
+    ArrayList<Shield>force = new ArrayList<Shield>()
+;    
     
     public void settings()
     {
@@ -103,6 +105,10 @@ public class UI extends PApplet
                 if(shield.isActivated() == true && shield.fuel != 0)
                 {
                     shield.fuel--;
+                    for(Shield field:force)
+                    {
+                        field.render();
+                    }
                 }
             }
             if(bkimage == woman)
@@ -290,7 +296,7 @@ public class UI extends PApplet
         elements.add(new Barchart(this, 30, height - 30));
         elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
         weapon = new Weapon(width - 200, height/2 + 50, 150,180,false,this);
-        shield = new Shield(50,height/2-100,200,300,false,this);
+        shield = new ShieldGenerator(50,height/2-100,200,300,false,this);
         for(int i = 0; i < 4; i++)
         {
             elements.add(new Numbers(width - 220, 170 + (i*30),this));
@@ -314,6 +320,14 @@ public class UI extends PApplet
         dead = loadImage("dead.jpg");
         bkimage = offline;
         loadSpec();
+        for(int i = 0; i < 10; i++)
+        {
+            for(int j = 10; j < 0; j--)
+            {
+                barrier = new Shield((width/j), (height/j), width/10, this);
+                force.add(barrier);
+            }
+        }
         
      }
     int[] area = new int[3];    

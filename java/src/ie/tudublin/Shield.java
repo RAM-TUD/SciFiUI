@@ -1,65 +1,33 @@
 package ie.tudublin;
 
 import processing.core.PApplet;
+import processing.core.PVector;
 
-public class Shield extends DefenseSystem
+public class Shield
 {
-    private float buttonheight;
-    private boolean activated = false;
-    public float fuel;
-    
-    public Shield(float x, float y, float size, float length, boolean enabled, PApplet ui)
+    public PVector coord;
+    private float distance;
+    private PApplet ui;
+
+    public Shield (float x, float y, float distance, PApplet ui)
     {
-        super(x,y,size,length,enabled,ui);
-        this.buttonheight = y +length-20;
-        this.activated = false;
-        this.fuel = length - 40;
+        this.coord.x = x;
+        this.coord.y = y;
+        this.distance = distance;
+        this.ui = ui;
     }
+
     public void render()
     {
-        ui.fill(255,0,0,100);
-        ui.rect(x,y,size,length);
-        int gap = 20;
-        for(int i = 0; i < 6; i++)
-        {
-            ui.fill(150,0,40);
-            ui.rect(x+length/12,y + gap+ (i*(gap+size/8)),length/6,size/8);
-        }
-        ui.stroke(0);
-        ui.line(x+size/2,y+20,x+size/2, y + length - 20);
-        ui.fill(255);
-        ui.rect(x+size/2-20,buttonheight,40,20);
-        ui.fill(0,255,0);
-        ui.rect(x+3*(size)/4,y+20,gap,fuel);
+        ui.noFill();
+        ui.stroke(0,255,0);
+        ui.beginShape();
+        ui.vertex(coord.x, coord.y);
+        ui.vertex(coord.x + distance, coord.y);
+        ui.vertex (coord.x + 2*(distance), coord.y + distance);
+        ui.vertex(coord.x + distance, coord.y + 2*(distance));
+        ui.vertex(coord.x,coord.y+2*(distance));
+        ui.vertex(coord.x - distance, coord.y+distance);
+        ui.vertex(coord.x,coord.y);
     }
-
-    /**
-     * @return the buttonheight
-     */
-    public float getButtonheight() {
-        return buttonheight;
-    }
-
-    /**
-     * @param buttonheight the buttonheight to set
-     */
-    public void setButtonheight(float buttonheight) {
-        this.buttonheight = buttonheight;
-    }
-
-    /**
-     * @return the activated
-     */
-    public boolean isActivated() {
-        return activated;
-    }
-
-    /**
-     * @param activated the activated to set
-     */
-    public void setActivated(boolean activated) {
-        this.activated = activated;
-    }
-
-    
 }
