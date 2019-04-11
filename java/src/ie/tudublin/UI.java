@@ -320,16 +320,17 @@ public class UI extends PApplet
         dead = loadImage("dead.jpg");
         bkimage = offline;
         loadSpec();
-        for(int i = 0; i < 10; i++)
+        float distance = 30;
+        for(int i = 0; i <= 25; i++)
         {
-            for(int j = 10; j < 0; j--)
+            for(int j = 0; j < 25; j++)
             {
-                barrier = new Shield((width/j), (height/j), width/10, this);
+                barrier = new Shield(j*(3*distance),i*(2*(distance)), distance, this);
                 force.add(barrier);
             }
         }
         
-     }
+    }
     int[] area = new int[3];    
     public void mousePressed()
     {
