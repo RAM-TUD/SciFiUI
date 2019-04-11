@@ -92,9 +92,17 @@ public class UI extends PApplet
                 shield.render();
                 searchmode.render();
                 float shieldh = shield.y+shield.length-20;
-                if(shield.enabled == true && mouseY < shieldh && mouseY > shield.y+20)
+                if(shield.enabled == true && mouseY <= shieldh && mouseY >= shield.y+20 && shield.isActivated() == false)
                 {
                     shield.setButtonheight(mouseY);
+                }
+                if(shield.getButtonheight() == shield.y+20)
+                {
+                        shield.setActivated(true);
+                }
+                if(shield.isActivated() == true && shield.fuel != 0)
+                {
+                    shield.fuel--;
                 }
             }
             if(bkimage == woman)

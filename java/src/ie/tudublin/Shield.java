@@ -5,11 +5,15 @@ import processing.core.PApplet;
 public class Shield extends DefenseSystem
 {
     private float buttonheight;
+    private boolean activated = false;
+    public float fuel;
     
     public Shield(float x, float y, float size, float length, boolean enabled, PApplet ui)
     {
         super(x,y,size,length,enabled,ui);
-        this.buttonheight = y;
+        this.buttonheight = y +length-20;
+        this.activated = false;
+        this.fuel = length - 40;
     }
     public void render()
     {
@@ -24,9 +28,9 @@ public class Shield extends DefenseSystem
         ui.stroke(0);
         ui.line(x+size/2,y+20,x+size/2, y + length - 20);
         ui.fill(255);
-        ui.rect(x+size/2-20,buttonheight+length-20,40,20);
+        ui.rect(x+size/2-20,buttonheight,40,20);
         ui.fill(0,255,0);
-        ui.rect(x+3*(size)/4,y+20,gap,length - 40);
+        ui.rect(x+3*(size)/4,y+20,gap,fuel);
     }
 
     /**
@@ -42,4 +46,20 @@ public class Shield extends DefenseSystem
     public void setButtonheight(float buttonheight) {
         this.buttonheight = buttonheight;
     }
+
+    /**
+     * @return the activated
+     */
+    public boolean isActivated() {
+        return activated;
+    }
+
+    /**
+     * @param activated the activated to set
+     */
+    public void setActivated(boolean activated) {
+        this.activated = activated;
+    }
+
+    
 }
