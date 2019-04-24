@@ -8,11 +8,21 @@ Fork this repository and use it a starter project for your assignment
 
 # Description of the assignment
 
+A UI for a evil Terminatiing robot, who's goal is to terminate all targets. Made using processing.
+
 # Instructions
+
+While you are in the main screen, click on a silohouette to zoom in to the target.
+While you are zoomed in a target, there will be three squares around the target's body. Click on each square to analyse them to update the threat level. Once you have analysed all points, press t to terminate them. After that the target will dissapear from the main screen.
+If you are zoomed in the man, one analysis point is a witness. You must click on the weapon and the cursor will change. Click on the witness to eliminate him, otherwise he will call the police, and it's game over.
+If you are zoomed in the soldier, pressing t will get you shot down. Clicking the weapon will do the same. You need to activate the shield by clicking the white bar and moving the mouse up until the top. The shield will activate and then you can use the weapon to shoot the soldier. You only have a limited time before the fuel goes down and the shiled gets deactivated.
 
 # How it works
 
+The cursor is controlled by the mouse. The targets being on the main screen is controlled by boolean variables, once killed it will set change them, hence dissapeared. The UI designs are all made using Processing shapes and rotations.
+
 # What I am most proud of in the assignment
+I'm most proud of how I made this both a UI and a little game. I incorparated both some designs as well as scenarios in which must be played out to have effect and move on. I'm proud of how I managed to get all the events played out, even scenarios where you have not correctly dealt with the Target, in which you will get a game over, but also making each target a bit more challenging, thus adding more functionality.
 
 # Markdown Tutorial
 
