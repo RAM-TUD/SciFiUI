@@ -19,7 +19,9 @@ If you are zoomed in the soldier, pressing t will get you shot down. Clicking th
 
 # How it works
 
-The cursor is controlled by the mouse. The targets being on the main screen is controlled by boolean variables, once killed it will set change them, hence dissapeared. The UI designs are all made using Processing shapes and rotations.
+The cursor is controlled by the mouse. The targets being on the main screen is controlled by boolean variables, once killed it will set change them, hence dissapeared. The UI designs are all made using Processing shapes and rotations each with it's own class qhich all inherit the UIElements super class. All the designs are put into an Arraylist of type UIElements, in here Polymorphism is used as many diffrent elements are instances of their own subclass, but type of super class. The arralist is iterated through in draw(), which draws out all the shapes.
+
+The background images is controlled by the PIamge variable bkimage. Depending on events such as loading screen finished, or clicked on a silohoutte, the bkimage will be intialised to a diffrent image, thus changing the background.
 
 # What I am most proud of in the assignment
 I'm most proud of how I made this both a UI and a little game. I incorparated both some designs as well as scenarios in which must be played out to have effect and move on. I'm proud of how I managed to get all the events played out, even scenarios where you have not correctly dealt with the Target, in which you will get a game over, but also making each target a bit more challenging, thus adding more functionality.
