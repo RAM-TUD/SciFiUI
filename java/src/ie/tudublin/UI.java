@@ -259,7 +259,7 @@ public class UI extends PApplet
             if(bkimage == soldier)
             {
                 shield.render();
-                weapon.render();
+                weapon.render();//hello
                 float shieldh = shield.y+shield.length-20;
                 if(shield.enabled == true && mouseY <= shieldh && mouseY >= shield.y+20 && shield.isActivated() == false)
                 {
