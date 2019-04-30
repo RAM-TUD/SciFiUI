@@ -19,6 +19,7 @@ public class UI extends PApplet
     PImage pedestrian3;
     PImage woman;
     PImage man;
+    PImage soldier;
     PImage bkimage;
     Targeting targeting;
     ArrayList<UIElements> elements = new ArrayList<UIElements>();
@@ -33,6 +34,7 @@ public class UI extends PApplet
     boolean killedWoman = false;
     boolean killedMan = false;
     PImage dead;
+    PoliceLights popo;
     AudioPlayer scan;
     AudioPlayer intro;
     AudioPlayer womanscream;
@@ -41,7 +43,9 @@ public class UI extends PApplet
     Weapon weapon;
     ShieldGenerator shield;
     Shield barrier;
-    ArrayList<Shield>force = new ArrayList<Shield>()
+    AudioPlayer field;
+    ArrayList<Shield>force = new ArrayList<Shield>();
+    boolean witnessKilled = false;
 ;    
     
     public void settings()
@@ -70,11 +74,7 @@ public class UI extends PApplet
                     text("TARGET ELIMINATED: MISSION SUCCESS",width/2,200);
                 }
                 textSize(30);
-                //text("ONLINE", width - 80, 50);
-                if(shield.enabled == false)
-                {
-                    text("ONLINE", width - 80, 50);   
-                }
+                text("ONLINE", width - 80, 50);
                 printSpec();
                 
                 if(killedMan == false)
@@ -91,26 +91,10 @@ public class UI extends PApplet
                     elements.get(i).render();
                 }
                 design();
-                shield.render();
                 searchmode.render();
-                float shieldh = shield.y+shield.length-20;
-                if(shield.enabled == true && mouseY <= shieldh && mouseY >= shield.y+20 && shield.isActivated() == false)
-                {
-                    shield.setButtonheight(mouseY);
-                }
-                if(shield.getButtonheight() == shield.y+20)
-                {
-                        shield.setActivated(true);
-                }
-                if(shield.isActivated() == true && shield.fuel != 0)
-                {
-                    shield.fuel--;
-                    for(Shield field:force)
-                    {
-                        field.render();
-                    }
-                }
             }
+                
+        }
             if(bkimage == woman)
             {
                 
@@ -224,8 +208,9 @@ public class UI extends PApplet
                          fill(255);
                          textSize(15);
                          text("THREAT NEUTRILIZED",d.x+d.getSize()+50,d.y-10);
-                        
-                     }
+                         witnessKilled = true;
+                         weapon.setEnabled(false);
+                    }
                 }
                 for(int i =0; i<area.length;i++)
                 {
@@ -257,8 +242,111 @@ public class UI extends PApplet
                     }
                     if(manscream.isPlaying() == false)
                     {
+                        if(witnessKilled == false)
+                        {
+                            background(0);
+                            popo.render();
+                            
+                        }
+                        else
+                        {
+                            bkimage = dead;
+                            killedMan = true;
+                        }
+                    }
+                }
+            }
+            if(bkimage == soldier)
+            {
+                shield.render();
+                weapon.render();
+                float shieldh = shield.y+shield.length-20;
+                if(shield.enabled == true && mouseY <= shieldh && mouseY >= shield.y+20 && shield.isActivated() == false)
+                {
+                    shield.setButtonheight(mouseY);
+                }
+                if(shield.getButtonheight() == shield.y+20)
+                {
+                        shield.setActivated(true);
+                }
+                if(shield.isActivated() == true && shield.fuel != 0)
+                {
+                    shield.fuel--;
+                    for(Shield field:force)
+                    {
+                        field.render();
+                    }
+                    field.play();
+                }
+                else
+                {
+                    field.pause();
+                }
+                
+                textSize(20);
+                if(analyse == 0)
+                {
+                    text("CURRENT THREAT LEVEL: UNKNOWN",200,100);
+                }
+                else
+                {
+                    text("CURRENT THREAT LEVEL: " + threatlevel + "%",200,100);
+                }
+                if(threatlevel < 30 && threatlevel > 0)
+                {
+                    fill(0,255,0);
+                    text("-THREAT LEVEL LOW, NO DANGER",515,100);
+                    fill(255);
+                }
+                else if(threatlevel > 30 && threatlevel < 60)
+                {
+                    fill(255,255,0);
+                    text("-OPTIMAL LEVEL: BE WARY",515,100);
+                    fill(255);
+                }
+                else if(threatlevel > 60)
+                {
+                    fill(255,0,0);
+                    text("DANGER: THREAT LEVEL HIGH",515,100);
+                    fill(255);
+                }
+                for(int i = 6; i <= 8; i++)
+                {
+                    Display d = displays.get(i);
+                    d.render();
+                }
+                for(int i =0; i <area.length;i++)
+                {
+                    if(area[i] != -1 && area[i] < 3)  
+                {
+                    Display d = displays.get(area[i]);
+                    float x = d.x;
+                    float y = d.y;
+                    line(x, y + d.getSize()/4, x - 150, y + d.getSize()/4 );
+                    line(x - 150, y + d.getSize()/4, x - 150, y + d.getSize()/4 - 30 );
+                    line(x - 150, y + d.getSize()/4 - 30, x - 250, y + d.getSize()/4 - 30 );
+                    textSize(15);
+                    text(d.getAnalysis() + " " + area[i], x - 250, y + d.getSize()/4 - 60);
+                    text(analyse,50,50);
+                }
+                }
+                if(analyse == 3)
+                {
+                    terminate = true;
+                    textSize(20);
+                    text("ANALYSIS COMPLETE : BEGIN TERMINATION?",250,height-20);
+                }
+                if(analyse == 40)
+                {
+                    for(int i = 0; i < 10; i++)
+                    {
+                        float liney = random(0,height);
+                        line(0,liney,width,liney);
+                    }
+                    if(womanscream.isPlaying() == false)
+                    {
                         bkimage = dead;
-                        killedMan = true;
+                        killedWoman = true;
                     }
                 }
             }
@@ -278,7 +366,8 @@ public class UI extends PApplet
             
         }
     
-    }
+
+
     public void setup()
     {
         searchmode = new SearchMode(this);
@@ -288,6 +377,7 @@ public class UI extends PApplet
         intro = minim.loadFile("intro.mp3");
         womanscream = minim.loadFile("womanscream.mp3");
         manscream = minim.loadFile("manscream.mp3");
+        field = minim.loadFile("force.mp3");
         file.play();
         file.loop();
         alley = loadImage("street.jpg");
@@ -297,10 +387,12 @@ public class UI extends PApplet
         elements.add(new Grid(this,width - 285, (height/2) - 20, 250));
         weapon = new Weapon(width - 200, height/2 + 50, 150,180,false,this);
         shield = new ShieldGenerator(50,height/2-100,200,300,false,this);
+        popo = new PoliceLights(width/2,height/2,300,this);
         for(int i = 0; i < 4; i++)
         {
             elements.add(new Numbers(width - 220, 170 + (i*30),this));
         }
+        
         for(int i = 0; i < 8; i++)
         { 
             elements.add(new Button(this,350 + (i*80),50,50));
@@ -311,19 +403,23 @@ public class UI extends PApplet
         displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH ",9,false));
         displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED",15,false));
         displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED",34,true));
+        displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH ",9,false));
+        displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED",15,false));
+        displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED",34,true));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
         pedestrian3 = targeting.loadtarget("soldier.png");
         woman = loadImage("womantargeted.jpg");
         man = loadImage("mantargeted.jpg");
+        soldier = loadImage("soldierlocked.jpg");
         dead = loadImage("dead.jpg");
         bkimage = offline;
         loadSpec();
         float distance = 30;
-        for(int i = 0; i <= 25; i++)
+        for(int i = 0; i <= 11; i++)
         {
-            for(int j = 0; j < 25; j++)
+            for(int j = 0; j < 15; j++)
             {
                 barrier = new Shield(j*(3*distance),i*(2*(distance)), distance, this);
                 force.add(barrier);
@@ -344,12 +440,6 @@ public class UI extends PApplet
             bkimage = woman;
             threatlevel = 0;
         }
-        float triggerx = shield.x+shield.size/2-20;
-        float triggery = shield.y+shield.length-20;
-        if(mouseX > triggerx && mouseX < triggerx + 40 && mouseY > triggery && mouseY < triggery + 20)
-        {
-            shield.enabled = true;
-        }
         if(bkimage == alley && mouseX > 300 && mouseX < 300 + 100 && mouseY > height/2 -50 && mouseY < height/2 - 50 + 300 && killedMan == false)
         {
             for(int i = 0; i < area.length; i++)
@@ -358,6 +448,17 @@ public class UI extends PApplet
             }
             analyse = 0;
             bkimage = man;
+            threatlevel = 0;
+        }
+        if(bkimage == alley && mouseX > 650 && mouseX < 650 + 250 && mouseY > height/2 && mouseY < height/2 + 30)
+        {
+            for(int i = 0; i < area.length; i++)
+            {
+                area[i] = -1;
+            }
+            analyse = 0;
+            tint(255,0,0);
+            bkimage = soldier;
             threatlevel = 0;
         }
         if(bkimage == woman)
@@ -386,6 +487,46 @@ public class UI extends PApplet
         }
         if(bkimage == man)
         {
+            if(mouseX > weapon.x && mouseX < weapon.x + weapon.getLength() + 50 && mouseY >weapon.y &&  mouseY <weapon.y+weapon.getSize()/2 && weapon.isEnabled() == false)
+            {
+                weapon.setEnabled(true);
+            }
+            
+            for(int i = 3; i < 6; i++)
+            {
+                float x = displays.get(i).x;
+                float y = displays.get(i).y;
+                if(mouseX < x + displays.get(i).getSize() && mouseX > x && mouseY < y + displays.get(i).getSize() && mouseY > y)
+                {
+                    if(displays.get(i).isVisited() == false)
+                    {
+                        area[analyse] = i;
+                        scan.play();
+                        scan.rewind();
+                        displays.get(i).setVisited(true);
+                        if(analyse != 3)
+                        {
+                            threatlevel += displays.get(i).getIncreasethreat();
+                            analyse++;
+                        }
+                    }
+                    if(displays.get(i).isVisited() == true && weapon.isEnabled() == true)
+                    {
+                        displays.get(i).setTrigger(true);
+                    }
+                    
+                
+                }
+            }
+        }
+        if(bkimage == soldier)
+        {
+            float triggerx = shield.x+shield.size/2-20;
+            float triggery = shield.y+shield.length-20;
+            if(mouseX > triggerx && mouseX < triggerx + 40 && mouseY > triggery && mouseY < triggery + 20)
+            {
+                shield.enabled = true;
+            }
             if(mouseX > weapon.x && mouseX < weapon.x + weapon.getLength() + 50 && mouseY >weapon.y &&  mouseY <weapon.y+weapon.getSize()/2 && weapon.isEnabled() == false)
             {
                 weapon.setEnabled(true);

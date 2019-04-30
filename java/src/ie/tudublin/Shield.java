@@ -9,6 +9,8 @@ public class Shield
     private float distance;
     private PApplet ui;
     public float x, y;
+   
+    
 
     public Shield (float x, float y, float distance, PApplet ui)
     {
@@ -33,5 +35,6 @@ public class Shield
         ui.vertex(x - distance, y+distance);
         ui.vertex(x,y);
         ui.endShape();
+       
     }
 }
