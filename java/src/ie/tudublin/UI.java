@@ -259,7 +259,7 @@ public class UI extends PApplet
             if(bkimage == soldier)
             {
                 shield.render();
-                weapon.render();//hello
+                weapon.render();
                 float shieldh = shield.y+shield.length-20;
                 if(shield.enabled == true && mouseY <= shieldh && mouseY >= shield.y+20 && shield.isActivated() == false)
                 {
@@ -317,7 +317,7 @@ public class UI extends PApplet
                 }
                 for(int i =0; i <area.length;i++)
                 {
-                    if(area[i] != -1 && area[i] < 3)  
+                    if(area[i] > 5 && area[i] < 9)  
                 {
                     Display d = displays.get(area[i]);
                     float x = d.x;
@@ -403,9 +403,9 @@ public class UI extends PApplet
         displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH ",9,false));
         displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED",15,false));
         displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED",34,true));
-        displays.add(new Display(width/2,100,this,150,"TARGET IDENTIFIED : JACOB HOMES | CONFIRMED MATCH ",9,false));
-        displays.add(new Display(width/2 - 50, height - 200,this,120,"BEER CAN AT ARMS : STABILITY AT 73%| CAPABLE OF ATTACK - CAUTION ADVISED",15,false));
-        displays.add(new Display(width/2 + 200, 180 ,this,120,"WITNESS IN SURROUNDINGS : CHANCES OF UNDECTION NULLIFIED",34,true));
+        displays.add(new Display(width/2 - 220,height/2 - 20,this,100,"TANKS SPOTTED, MUST DEAL WITH TARGET IMMEDIATELY ",24,false));
+        displays.add(new Display(width/2 + 150, height - 300,this,150,"GUN CAN AT ARMS : MUST DEFEND SELF",40,false));
+        displays.add(new Display(width/2 + 150, 80 ,this,150,"TARGET IDENTIFIED : MASON HAROLDS, DANGEROUS: BE AWARE",25,true));
         targeting = new Targeting(this,50);
         pedestrian1 = targeting.loadtarget("man.png");
         pedestrian2 = targeting.loadtarget("woman.png");
@@ -532,7 +532,7 @@ public class UI extends PApplet
                 weapon.setEnabled(true);
             }
             
-            for(int i = 3; i < 6; i++)
+            for(int i = 6; i < 9; i++)
             {
                 float x = displays.get(i).x;
                 float y = displays.get(i).y;

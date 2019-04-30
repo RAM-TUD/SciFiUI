@@ -6,12 +6,13 @@ public class Weapon extends DefenseSystem
 {
     
     private float rotation;
+    private float ammo;
     
     public Weapon(float x, float y, float size, float length, boolean enabled, PApplet ui)
     {
         super(x,y,size,length,enabled,ui);
         this.rotation = 0;
-       
+        this.ammo = 1;
     }
 
     public void render()
@@ -105,6 +106,20 @@ public class Weapon extends DefenseSystem
      */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    /**
+     * @return the ammo
+     */
+    public float getAmmo() {
+        return ammo;
+    }
+
+    /**
+     * @param ammo the ammo to set
+     */
+    public void setAmmo(float ammo) {
+        this.ammo = ammo;
     }
 
 }

@@ -2,7 +2,7 @@ package ie.tudublin;
 
 import processing.core.PApplet;
 
-public class Button extends UIElements
+public class Button extends UIElements implements Reloader
 {
    
     private float size;
@@ -19,6 +19,10 @@ public class Button extends UIElements
         ui.stroke(200,0,0);
         ui.fill(255,0,0,100);
         ui.rect(x,y,size,size);
+    }
+    public void reload(Weapon w)
+    {
+        w.setAmmo(w.getAmmo()+1);
     }
    
 
