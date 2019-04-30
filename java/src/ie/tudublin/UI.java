@@ -88,7 +88,16 @@ public class UI extends PApplet
                 targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
                 for(int i = 0 ; i < elements.size() ; i ++)
                 {
-                    elements.get(i).render();
+                    UIElements elem = elements.get(i);
+                    elem.render();
+                    if(elem instanceof Reloader)
+                    {
+                        float size = ((Button)elem).getSize();
+                        if(((Button)elem).isUsed() == false && mouseX > elem.x && mouseX < elem.x + size && mouseY > elem.y && mouseY < elem.y + size)  
+                        {
+                            ((Button)elem).reload(weapon);
+                        }
+                    }
                 }
                 design();
                 searchmode.render();

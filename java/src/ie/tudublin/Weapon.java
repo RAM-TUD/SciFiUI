@@ -24,6 +24,7 @@ public class Weapon extends DefenseSystem
         ui.fill(255);
         ui.textSize(12);
         ui.text("ENABLE",x+size/2,y+size/3/2);
+        ui.text("AMMO : " + ammo,x+size/2,y+size/3/2 - 15);
         ui.text("WEAPON SYSTEMS", x + size/2, y + length + 60);
 
         ui.fill(255,50);
