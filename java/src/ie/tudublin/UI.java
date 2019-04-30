@@ -352,11 +352,12 @@ public class UI extends PApplet
                         float liney = random(0,height);
                         line(0,liney,width,liney);
                     }
-                    if(womanscream.isPlaying() == false)
+                    if(shield.enabled == false)
                     {
-                        bkimage = dead;
-                        killedWoman = true;
+                        Bullet b = new Bullet(random(0,width),random(0,height),50,this);
+                        b.render();
                     }
+                   
                 }
             }
             if(bkimage == dead)
@@ -500,10 +501,11 @@ public class UI extends PApplet
             {
                 weapon.setEnabled(true);
             }
-            if(weapon.isEnabled() == true)
+            if(weapon.isEnabled() == true && weapon.getAmmo() > 0)
             {
                 Bullet b = new Bullet(mouseX-50,mouseY-50,50,this);
                 b.render();
+                weapon.setAmmo(weapon.getAmmo()-1);
             }
             
             for(int i = 3; i < 6; i++)
