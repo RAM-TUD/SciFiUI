@@ -500,6 +500,11 @@ public class UI extends PApplet
             {
                 weapon.setEnabled(true);
             }
+            if(weapon.isEnabled() == true)
+            {
+                Bullet b = new Bullet(mouseX-50,mouseY-50,50,this);
+                b.render();
+            }
             
             for(int i = 3; i < 6; i++)
             {
