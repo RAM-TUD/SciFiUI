@@ -39,14 +39,18 @@ public class UI extends PApplet
     AudioPlayer intro;
     AudioPlayer womanscream;
     AudioPlayer manscream;
+    AudioPlayer gunshot;
     int threatlevel;
     Weapon weapon;
     ShieldGenerator shield;
     Shield barrier;
     AudioPlayer field;
+    AudioPlayer police;
     ArrayList<Shield>force = new ArrayList<Shield>();
     boolean witnessKilled = false;
-;    
+    boolean soldierKilled = false;
+    AudioPlayer tank;
+
     
     public void settings()
     {
@@ -85,7 +89,11 @@ public class UI extends PApplet
                 {
                     targeting.targets(pedestrian2, 750, height/2 - 40, 250, 270);
                 }
-                targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
+                if(soldierKilled == false)
+                {
+                    targeting.targets(pedestrian3, 650, height/2 - 85, 80, 200);
+                }
+                
                 for(int i = 0 ; i < elements.size() ; i ++)
                 {
                     UIElements elem = elements.get(i);
@@ -254,7 +262,17 @@ public class UI extends PApplet
                         if(witnessKilled == false)
                         {
                             background(0);
-                            popo.render();
+                            police.play();
+                            if(police.isPlaying() == false)
+                            {
+                                textSize(20);
+                                fill(255,0,0);
+                                text("APPRENDED",width/2,height/2);
+                            }
+                            else
+                            {
+                                popo.render();
+                            }
                             
                         }
                         else
@@ -323,6 +341,44 @@ public class UI extends PApplet
                 {
                     Display d = displays.get(i);
                     d.render();
+                    if(d.isTrigger() == true)
+                    {
+                        fill(255,0,0,100);
+                        rect(d.x,d.y,d.getSize(),d.getSize());
+                        line(d.x+d.getSize(),d.y + d.getSize()/2,d.x+d.getSize() + 100,d.y + d.getSize()/2);
+                        fill(255);
+                        textSize(15);
+                        text("THREAT NEUTRILIZED",d.x+d.getSize()+50,d.y-10);
+                        weapon.setEnabled(false);
+                        if(d.isTrigger()==true)
+                        {
+                            int event = 0;
+                            if(event < 1 || analyse == 40 && event < 1)
+                            {
+                                tank.play();
+                                event++;
+                            }
+                            // if(tank.isPlaying() == true)
+                            // {
+                            //     Bullet b = new Bullet(random(0,width),random(0,height),50,this);
+                            //     b.render();
+                                
+                            // }
+                            if (shield.enabled == false)
+                            {
+                                background(0);
+                                textSize(20);
+                                text("OFFLINE",width/2,height/2);
+                            }
+                            else if(shield.enabled == true) 
+                            {
+                                bkimage = dead;
+                                soldierKilled = true;
+                            }
+                         
+                            
+                        }
+                   }
                 }
                 for(int i =0; i <area.length;i++)
                 {
@@ -345,20 +401,16 @@ public class UI extends PApplet
                     textSize(20);
                     text("ANALYSIS COMPLETE : BEGIN TERMINATION?",250,height-20);
                 }
-                if(analyse == 40)
-                {
-                    for(int i = 0; i < 10; i++)
-                    {
-                        float liney = random(0,height);
-                        line(0,liney,width,liney);
-                    }
-                    if(shield.enabled == false)
-                    {
-                        Bullet b = new Bullet(random(0,width),random(0,height),50,this);
-                        b.render();
-                    }
+                // if(analyse == 40)
+                // {
+                //     for(int i = 0; i < 10; i++)
+                //     {
+                //         float liney = random(0,height);
+                //         line(0,liney,width,liney);
+                //     }
                    
-                }
+                // }
+              
             }
             if(bkimage == dead)
             {
@@ -388,8 +440,12 @@ public class UI extends PApplet
         womanscream = minim.loadFile("womanscream.mp3");
         manscream = minim.loadFile("manscream.mp3");
         field = minim.loadFile("force.mp3");
+        gunshot = minim.loadFile("gunshot.mp3");
+        police = minim.loadFile("police.mp3");
+        tank = minim.loadFile("tank.mp3");
         file.play();
         file.loop();
+        
         alley = loadImage("street.jpg");
         offline = loadImage("back.jpg");
         elements.add(new CircleUI(this,100,100,50));
@@ -460,7 +516,7 @@ public class UI extends PApplet
             bkimage = man;
             threatlevel = 0;
         }
-        if(bkimage == alley && mouseX > 650 && mouseX < 650 + 250 && mouseY > height/2 && mouseY < height/2 + 30)
+        if(bkimage == alley && mouseX > 650 && mouseX < 650 + 250 && mouseY > height/2 && mouseY < height/2 + 30 && soldierKilled == false)
         {
             for(int i = 0; i < area.length; i++)
             {
@@ -506,8 +562,9 @@ public class UI extends PApplet
                 Bullet b = new Bullet(mouseX-50,mouseY-50,50,this);
                 b.render();
                 weapon.setAmmo(weapon.getAmmo()-1);
+                gunshot.play();
+                gunshot.rewind();
             }
-            
             for(int i = 3; i < 6; i++)
             {
                 float x = displays.get(i).x;
@@ -547,7 +604,14 @@ public class UI extends PApplet
             {
                 weapon.setEnabled(true);
             }
-            
+            if(weapon.isEnabled() == true && weapon.getAmmo() > 0)
+            {
+                Bullet b = new Bullet(mouseX-50,mouseY-50,50,this);
+                b.render();
+                weapon.setAmmo(weapon.getAmmo()-1);
+                gunshot.play();
+                gunshot.rewind();
+            }
             for(int i = 6; i < 9; i++)
             {
                 float x = displays.get(i).x;
